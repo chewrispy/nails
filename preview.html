@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PREVIEW</title>
+<style>
+    *, *:before, *:after { box-sizing: border-box; }
+
+    body {
+        margin: 0;
+        padding: 32px;
+        background: #ffffff;
+        color: #17171a;
+        font-family: Pretendard, -apple-system, BlinkMacSystemFont, sans-serif;
+        line-height: 1.6;
+    }
+
+    .empty {
+        color: #81818a;
+        font-size: 14px;
+        padding: 60px 0;
+        text-align: center;
+    }
+
+    .eyebrow {
+        margin: 0 0 8px;
+        color: #81818a;
+        font-size: 10px;
+        font-weight: 900;
+        letter-spacing: .18em;
+    }
+
+    .title {
+        margin: 0 0 24px;
+        font-size: 32px;
+        font-weight: 900;
+        letter-spacing: -.04em;
+        line-height: 1.1;
+    }
+
+    dl {
+        margin: 0 0 24px;
+        border-top: 1px solid #e7e7ea;
+    }
+
+    dl div {
+        display: flex;
+        gap: 16px;
+        padding: 14px 0;
+        border-bottom: 1px solid #e7e7ea;
+    }
+
+    dt {
+        flex: 0 0 90px;
+        color: #81818a;
+        font-size: 11px;
+        font-weight: 800;
+        letter-spacing: .1em;
+        padding-top: 2px;
+    }
+
+    dd {
+        margin: 0;
+        font-weight: 600;
+        white-space: pre-wrap;
+    }
+
+    .colors {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+    }
+
+    .colors span {
+        width: 24px;
+        height: 24px;
+        border-radius: 50%;
+        border: 1px solid #e7e7ea;
+    }
+</style>
+</head>
+<body>
+
+<div id="content"></div>
+
+<script>
+(function () {
+    var raw = sessionStorage.getItem("naily-preview");
+    var root = document.getElementById("content");
+
+    if (!raw) {
+        root.innerHTML = '<p class="empty">미리보기 데이터가 없습니다.<br>관리자 페이지에서 STEP 03을 완료한 뒤 다시 시도해주세요.</p>';
+        return;
+    }
+
+    var data;
+    try {
+        data = JSON.parse(raw);
+    } catch (error) {
+        root.innerHTML = '<p class="empty">미리보기 데이터를 불러오지 못했습니다.</p>';
+        return;
+    }
+
+    var colors = Array.isArray(data.colors) ? data.colors : [];
+    var finish = Array.isArray(data.finish) ? data.finish.join(", ") : (data.finish || "");
+
+    var colorSwatches = colors.map(function (color) {
+        return '<span style="background:' + color + '"></span>';
+    }).join("");
+
+    root.innerHTML =
+        '<p class="eyebrow">' + (data.date || "") + '</p>' +
+        '<h1 class="title">' + (data.title || "Untitled Nail") + '</h1>' +
+        '<dl>' +
+            '<div><dt>SHAPE</dt><dd>' + (data.shape || "") + '</dd></div>' +
+            '<div><dt>FINISH</dt><dd>' + finish + '</dd></div>' +
+            '<div><dt>COLORS</dt><dd><span class="colors">' + colorSwatches + '</span></dd></div>' +
+            '<div><dt>MEMO</dt><dd>' + (data.memo || "") + '</dd></div>' +
+        '</dl>';
+})();
+</script>
+
+</body>
+</html>

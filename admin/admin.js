@@ -412,6 +412,142 @@ function fileToDataURL(file){
 }
  
  
+/* ==========================================================
+   IMAGE COMPRESSION
+   Vercel Serverless Functions reject request bodies over
+   ~4.5MB. Base64 inflates file size by ~33%, and raw phone
+   photos (2-8MB each) blow past that instantly once you have
+   a graphic + inspiration + several original photos in one
+   JSON payload. Downscale + re-encode as JPEG client-side
+   before it ever becomes base64, so a publish never gets
+   silently rejected by the platform before it reaches
+   api/publish.js.
+========================================================== */
+ 
+function loadImageElement(file){
+ 
+    return new Promise((resolve,reject)=>{
+ 
+        const url=URL.createObjectURL(file);
+ 
+        const image=new Image();
+ 
+        image.onload=()=>{
+ 
+            URL.revokeObjectURL(url);
+ 
+            resolve(image);
+ 
+        };
+ 
+        image.onerror=(error)=>{
+ 
+            URL.revokeObjectURL(url);
+ 
+            reject(error);
+ 
+        };
+ 
+        image.src=url;
+ 
+    });
+ 
+}
+ 
+ 
+function renameToJpg(name){
+ 
+    const base=
+ 
+        String(name||"image")
+            .replace(/\.[a-zA-Z0-9]+$/,"");
+ 
+    return `${base || "image"}.jpg`;
+ 
+}
+ 
+ 
+async function compressImageFile(
+ 
+    file,
+ 
+    maxDimension=1600,
+ 
+    quality=0.82
+ 
+){
+ 
+    if(!file){
+ 
+        return null;
+ 
+    }
+ 
+    let image;
+ 
+    try{
+ 
+        image=await loadImageElement(file);
+ 
+    }
+ 
+    catch(error){
+ 
+        return fileToDataURL(file);
+ 
+    }
+ 
+    let width=image.naturalWidth||image.width;
+ 
+    let height=image.naturalHeight||image.height;
+ 
+    if(!width||!height){
+ 
+        return fileToDataURL(file);
+ 
+    }
+ 
+    if(width>maxDimension||height>maxDimension){
+ 
+        const scale=
+ 
+            maxDimension/Math.max(width,height);
+ 
+        width=Math.round(width*scale);
+ 
+        height=Math.round(height*scale);
+ 
+    }
+ 
+    const canvas=document.createElement("canvas");
+ 
+    canvas.width=width;
+ 
+    canvas.height=height;
+ 
+    const context=canvas.getContext("2d");
+ 
+    context.drawImage(image,0,0,width,height);
+ 
+    const dataURL=
+ 
+        canvas.toDataURL("image/jpeg",quality);
+ 
+    return{
+ 
+        name:renameToJpg(file.name),
+ 
+        type:"image/jpeg",
+ 
+        size:file.size,
+ 
+        data:dataURL
+ 
+    };
+ 
+}
+ 
+ 
 function revokeInput(input){
  
     input.value="";
@@ -1366,20 +1502,25 @@ function fillPublishSummary() {
 async function createJSONPayload() {
  
     const graphic =
-        await fileToDataURL(
-            state.graphic
+        await compressImageFile(
+            state.graphic,
+            1800,
+            0.85
         );
  
     const inspiration =
-        await fileToDataURL(
-            state.inspiration
+        await compressImageFile(
+            state.inspiration,
+            1600,
+            0.82
         );
  
     const photos =
         await Promise.all(
  
             state.originalPhotos.map(
-                fileToDataURL
+                (file) =>
+                    compressImageFile(file, 1600, 0.82)
             )
  
         );
@@ -1465,6 +1606,24 @@ async event=>{
         const payload=
  
             await createJSONPayload();
+ 
+        const payloadSize=
+ 
+            new Blob([
+ 
+                JSON.stringify(payload)
+ 
+            ]).size;
+ 
+        if(payloadSize>4*1024*1024){
+ 
+            throw new Error(
+ 
+`이미지 용량이 너무 큽니다 (${(payloadSize/1024/1024).toFixed(1)}MB). 사진 수를 줄이거나 다시 시도해주세요.`
+ 
+            );
+ 
+        }
  
         setProgress(
  
@@ -1658,4 +1817,3 @@ if(getPassword()){
     showLogin();
  
 }
- 

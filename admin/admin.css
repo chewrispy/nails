@@ -1223,6 +1223,12 @@ button{
 
 }
 
+.statusMessage[hidden]{
+
+    display:none;
+
+}
+
 .statusMessage__text{
 
     margin:0;
@@ -1666,6 +1672,12 @@ button{
     align-items:center;
 
     background:white;
+
+}
+
+.loginOverlay[hidden]{
+
+    display:none;
 
 }
 

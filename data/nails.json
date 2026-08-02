@@ -2,7 +2,7 @@
   {
     "number": 30,
     "date": "2026-07-18",
-    "title": "Summer Glitter",
+    "title": "",
     "shape": "아몬드",
     "finish": [
       "자석",
@@ -10,19 +10,16 @@
       "글리터"
     ],
     "colors": [
-      "#9B72FF",
-      "#C99AF4",
-      "#F1D7EA",
-      "#55C8FF",
-      "#F4F4F4",
-      "#D9B15E"
+      "#F7D4E2",
+      "#D357FE",
+      "#D6D6D6"
     ],
-    "memo": "지난번 얼음네일이 너무 내구성이 떨어져서 파츠 같은 건 붙이지 않고 화려해 보이는 여름 느낌의 무언가를 해보고 싶었다. 네일샵에 가는 길에 스타벅스 음료를 마시다가 사진을 보고 이걸로 해보자 해서 구현했다. 큰 글리터를 얹어서 얼음을 표현했다.",
+    "memo": "지난번 얼음네일이 너무 내구성이 떨어져서 파츠 같은건 붙이지 않고 화려해보이는 여름느낌의 뭔가를 해보고 싶었음. 네일샵 가는 길에 스타벅스 음료를 마시다가 음료 사진을 보고 이걸로 해보자 해서 구현해본 네일. 큰 글리터를 얹어서 얼음을 표현.",
     "inspiration": "./assets/nails/2026-07-18/inspiration.jpg",
     "photos": [
       "./assets/nails/2026-07-18/original-01.jpg",
       "./assets/nails/2026-07-18/original-02.jpg"
     ],
-    "graphic": "./assets/nails/2026-07-18/nail-graphic.svg"
+    "graphic": "./assets/nails/2026-07-18/nail-graphic.jpg"
   }
 ]

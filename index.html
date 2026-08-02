@@ -8,1348 +8,221 @@
     >
     <meta
         name="description"
-        content="NAILS DONE. Archive Admin"
+        content="Personal Nail Archive"
     >
     <meta
         name="theme-color"
         content="#ffffff"
     >
-    <title>NAILS DONE. ADMIN</title>
+    <title>NAILS DONE.</title>
     <link
         rel="stylesheet"
-        href="/admin/admin.css"
+        href="./css/style.css"
     >
 </head>
 <body>
-    <main class="adminPage">
-        <!-- ==================================================
-             HEADER
-        =================================================== -->
-        <header class="adminHeader">
-            <div class="adminHeader__titleGroup">
-                <p class="adminHeader__eyebrow">
-                    PERSONAL NAIL ARCHIVE
-                </p>
-                <h1 class="adminHeader__title">
-                    NEW
-                    <span>ARCHIVE.</span>
-                </h1>
-            </div>
-            <div class="adminHeader__tools">
-                <a
-                    class="adminHeader__archiveLink"
-                    href="/"
-                    target="_blank"
-                    rel="noopener"
-                >
-                    VIEW ARCHIVE ↗
-                </a>
-                <button
-                    id="openDiagnostics"
-                    class="adminHeader__diagnostics"
-                    type="button"
-                >
-                    SYSTEM CHECK
-                </button>
-            </div>
-        </header>
-        <!-- ==================================================
-             PROGRESS
-        =================================================== -->
-        <nav
-            class="progress"
-            aria-label="아카이브 등록 단계"
-        >
-            <ol class="progress__list">
-                <li
-                    class="progress__item is-active"
-                    data-step-indicator="1"
-                >
-                    <span class="progress__number">
-                        01
-                    </span>
-                    <span class="progress__label">
-                        INPUT
-                    </span>
-                </li>
-                <li
-                    class="progress__item"
-                    data-step-indicator="2"
-                >
-                    <span class="progress__number">
-                        02
-                    </span>
-                    <span class="progress__label">
-                        ANALYZE
-                    </span>
-                </li>
-                <li
-                    class="progress__item"
-                    data-step-indicator="3"
-                >
-                    <span class="progress__number">
-                        03
-                    </span>
-                    <span class="progress__label">
-                        PREVIEW
-                    </span>
-                </li>
-                <li
-                    class="progress__item"
-                    data-step-indicator="4"
-                >
-                    <span class="progress__number">
-                        04
-                    </span>
-                    <span class="progress__label">
-                        PUBLISH
-                    </span>
-                </li>
-            </ol>
-        </nav>
-        <!-- ==================================================
-             STATUS MESSAGE
-        =================================================== -->
+    <main class="page">
+        <!-- HERO -->
         <section
-            id="statusMessage"
-            class="statusMessage"
-            aria-live="polite"
-            hidden
+            class="hero"
+            aria-labelledby="siteTitle"
         >
-            <p class="statusMessage__text"></p>
-            <button
-                id="statusMessageClose"
-                class="statusMessage__close"
-                type="button"
-                aria-label="상태 메시지 닫기"
+            <p class="hero__caption">
+                PERSONAL NAIL ARCHIVE
+            </p>
+            <h1
+                id="siteTitle"
+                class="hero__title"
             >
-                ×
-            </button>
+                <span>NAILS</span>
+                <span>DONE.</span>
+            </h1>
         </section>
-        <!-- ==================================================
-             FORM
-        =================================================== -->
-        <form
-            id="archiveForm"
-            class="archiveForm"
-            novalidate
-        >
-            <!-- ==================================================
-                 STEP 1
-            =================================================== -->
-            <section
-                class="formStep is-active"
-                data-step="1"
+        <!-- ARCHIVE DETAIL -->
+        <section class="archive">
+            <!-- PREVIOUS / NEXT -->
+            <nav
+                class="archiveNav"
+                aria-label="네일 기록 이동"
             >
-                <div class="stepHeader">
-                    <p class="stepHeader__number">
-                        STEP 01
-                    </p>
-                    <h2 class="stepHeader__title">
-                        기록을 입력하세요.
-                    </h2>
-                    <p class="stepHeader__description">
-                        평소 작성하던 메모와 사진만 올리면 나머지는 AI가 정리합니다.
-                    </p>
-                </div>
-                <!-- DATE / TITLE -->
-                <div class="fieldGrid fieldGrid--two">
-                    <div class="field">
-                        <label
-                            class="field__label"
-                            for="archiveDate"
-                        >
-                            DATE
-                            <span aria-hidden="true">*</span>
-                        </label>
-                        <input
-                            id="archiveDate"
-                            class="field__input"
-                            name="date"
-                            type="date"
-                            required
-                        >
-                        <p class="field__error"></p>
-                    </div>
-                    <div class="field">
-                        <label
-                            class="field__label"
-                            for="archiveTitle"
-                        >
-                            TITLE
-                            <span class="field__optional">
-                                OPTIONAL
-                            </span>
-                        </label>
-                        <input
-                            id="archiveTitle"
-                            class="field__input"
-                            name="title"
-                            type="text"
-                            placeholder="예: Summer Glitter"
-                            maxlength="80"
-                        >
-                    </div>
-                </div>
-                <!-- MEMO -->
-                <div class="field">
-                    <div class="field__heading">
-                        <label
-                            class="field__label"
-                            for="archiveMemo"
-                        >
-                            MEMO
-                            <span aria-hidden="true">*</span>
-                        </label>
-                        <span
-                            id="memoCount"
-                            class="field__counter"
-                        >
-                            0 / 3000
-                        </span>
-                    </div>
-                    <textarea
-                        id="archiveMemo"
-                        class="field__textarea"
-                        name="memo"
-                        rows="9"
-                        maxlength="3000"
-                        required
-                        placeholder="평소 작성하던 네일 메모를 그대로 붙여넣으세요."
-                    ></textarea>
-                    <p class="field__help">
-                        문장을 다듬지 않아도 됩니다. AI가 메모를 읽고 특징을 정리합니다.
-                    </p>
-                    <p class="field__error"></p>
-                </div>
-                <!-- ORIGINAL PHOTOS -->
-                <div class="field">
-                    <div class="field__heading">
-                        <div>
-                            <label
-                                class="field__label"
-                                for="originalPhotos"
-                            >
-                                ORIGINAL PHOTOS
-                                <span aria-hidden="true">*</span>
-                            </label>
-                            <p class="field__help">
-                                네일 디자인이 잘 보이는 손 사진을 1~6장 올려주세요.
-                            </p>
-                        </div>
-                        <span
-                            id="originalPhotoCount"
-                            class="field__counter"
-                        >
-                            0 / 6
-                        </span>
-                    </div>
-                    <div
-                        id="originalDropzone"
-                        class="dropzone"
-                        tabindex="0"
-                        role="button"
-                        aria-controls="originalPhotos"
-                    >
-                        <input
-                            id="originalPhotos"
-                            class="dropzone__input"
-                            name="originalPhotos"
-                            type="file"
-                            accept="image/jpeg,image/png,image/webp,image/heic,image/heif"
-                            multiple
-                            required
-                        >
-                        <div class="dropzone__content">
-                            <span
-                                class="dropzone__icon"
-                                aria-hidden="true"
-                            >
-                                ＋
-                            </span>
-                            <p class="dropzone__title">
-                                사진을 드래그하거나 클릭하세요.
-                            </p>
-                            <p class="dropzone__description">
-                                JPG · PNG · WEBP · HEIC / 파일당 최대 15MB
-                            </p>
-                        </div>
-                    </div>
-                    <div
-                        id="originalPhotoPreview"
-                        class="uploadPreview"
-                        aria-live="polite"
-                    >
-                    </div>
-                    <p class="field__error"></p>
-                </div>
-                <!-- INSPIRATION -->
-                <div class="field">
-                    <div class="field__heading">
-                        <div>
-                            <label
-                                class="field__label"
-                                for="inspirationImage"
-                            >
-                                INSPIRATION IMAGE
-                                <span class="field__optional">
-                                    OPTIONAL
-                                </span>
-                            </label>
-                            <p class="field__help">
-                                레퍼런스 사진이 있었던 경우에만 한 장 올려주세요.
-                            </p>
-                        </div>
-                    </div>
-                    <div
-                        id="inspirationDropzone"
-                        class="dropzone dropzone--compact"
-                        tabindex="0"
-                        role="button"
-                        aria-controls="inspirationImage"
-                    >
-                        <input
-                            id="inspirationImage"
-                            class="dropzone__input"
-                            name="inspirationImage"
-                            type="file"
-                            accept="image/jpeg,image/png,image/webp,image/heic,image/heif"
-                        >
-                        <div class="dropzone__content">
-                            <span
-                                class="dropzone__icon"
-                                aria-hidden="true"
-                            >
-                                ＋
-                            </span>
-                            <p class="dropzone__title">
-                                레퍼런스 이미지를 추가하세요.
-                            </p>
-                        </div>
-                    </div>
-                    <div
-                        id="inspirationPreview"
-                        class="uploadPreview uploadPreview--single"
-                    >
-                    </div>
-                </div>
-                <!-- NEXT -->
-                <div class="stepActions">
-                    <button
-                        id="goToAnalyze"
-                        class="button button--primary"
-                        type="button"
-                    >
-                        CONTINUE
-                        <span aria-hidden="true">
-                            →
-                        </span>
-                    </button>
-                </div>
-            </section>
-            <!-- ==================================================
-                 STEP 2
-            =================================================== -->
-            <section
-                class="formStep"
-                data-step="2"
-                hidden
-            >
-                <div class="stepHeader">
-                    <p class="stepHeader__number">
-                        STEP 02
-                    </p>
-                    <h2 class="stepHeader__title">
-                        사진을 분석합니다.
-                    </h2>
-                    <p class="stepHeader__description">
-                        손톱 모양, 마감 방식, 컬러와 열 손가락 네일 그래픽을 생성합니다.
-                    </p>
-                </div>
-                <!-- INPUT SUMMARY -->
-                <section class="inputSummary">
-                    <div class="inputSummary__content">
-                        <div>
-                            <span class="inputSummary__label">
-                                DATE
-                            </span>
-                            <strong
-                                id="summaryDate"
-                                class="inputSummary__value"
-                            >
-                            </strong>
-                        </div>
-                        <div>
-                            <span class="inputSummary__label">
-                                TITLE
-                            </span>
-                            <strong
-                                id="summaryTitle"
-                                class="inputSummary__value"
-                            >
-                            </strong>
-                        </div>
-                        <div>
-                            <span class="inputSummary__label">
-                                PHOTOS
-                            </span>
-                            <strong
-                                id="summaryPhotoCount"
-                                class="inputSummary__value"
-                            >
-                            </strong>
-                        </div>
-                    </div>
-                    <button
-                        id="backToInput"
-                        class="textButton"
-                        type="button"
-                    >
-                        EDIT INPUT
-                    </button>
-                </section>
-                <!-- MODE SELECTOR -->
-                <section class="modeSelector">
-                    <div class="modeSelector__heading">
-                        <p class="modeSelector__eyebrow">
-                            PROCESSING MODE
-                        </p>
-                        <h3 class="modeSelector__title">
-                            등록 방식을 선택하세요.
-                        </h3>
-                    </div>
-                    <div
-                        class="modeSelector__options"
-                        role="radiogroup"
-                        aria-label="등록 방식 선택"
-                    >
-                        <label class="modeOption">
-                            <input
-                                id="aiMode"
-                                class="modeOption__input"
-                                type="radio"
-                                name="processingMode"
-                                value="ai"
-                            >
-                            <span class="modeOption__card">
-                                <span class="modeOption__label">
-                                    AI MODE
-                                </span>
-                                <strong class="modeOption__title">
-                                    사진을 자동 분석
-                                </strong>
-                                <span class="modeOption__description">
-                                    Shape, Finish, Color와 네일 SVG를 자동 생성합니다.
-                                </span>
-                            </span>
-                        </label>
-                        <label class="modeOption">
-                            <input
-                                id="manualMode"
-                                class="modeOption__input"
-                                type="radio"
-                                name="processingMode"
-                                value="manual"
-                                checked
-                            >
-                            <span class="modeOption__card">
-                                <span class="modeOption__label">
-                                    MANUAL MODE
-                                </span>
-                                <strong class="modeOption__title">
-                                    직접 정보 입력
-                                </strong>
-                                <span class="modeOption__description">
-                                    추가 API 비용 없이 메타데이터와 SVG를 직접 등록합니다.
-                                </span>
-                            </span>
-                        </label>
-                    </div>
-                </section>
-                <div id="aiModePanel" hidden>
-                    <!-- ANALYZE DESCRIPTION -->
-                    <section class="analyzePanel">
-                        <div class="analyzePanel__visual">
-                            <div
-                                id="analyzeOrb"
-                                class="analyzeOrb"
-                                aria-hidden="true"
-                            >
-                            </div>
-                        </div>
-                        <div class="analyzePanel__content">
-                            <h3 class="analyzePanel__title">
-                                AI가 자동으로 생성합니다.
-                            </h3>
-                            <ul class="analyzePanel__list">
-                                <li>
-                                    손톱 쉐입
-                                </li>
-                                <li>
-                                    자석 · 글리터 · 그라데이션 등 특징
-                                </li>
-                                <li>
-                                    대표 컬러 팔레트
-                                </li>
-                                <li>
-                                    왼손 5개 + 오른손 5개 네일 SVG
-                                </li>
-                            </ul>
-                        </div>
-                    </section>
-                    <!-- ANALYSIS PROGRESS -->
-                    <section
-                        id="analysisProgress"
-                        class="analysisProgress"
-                        hidden
-                    >
-                        <div class="analysisProgress__header">
-                            <span id="analysisProgressLabel">
-                                사진을 준비하고 있습니다.
-                            </span>
-                            <span id="analysisProgressValue">
-                                0%
-                            </span>
-                        </div>
-                        <div class="analysisProgress__track">
-                            <span
-                                id="analysisProgressBar"
-                                class="analysisProgress__bar"
-                            >
-                            </span>
-                        </div>
-                    </section>
-                    <!-- ACTION -->
-                    <div class="stepActions">
-                        <button
-                            id="startAnalyze"
-                            class="button button--primary"
-                            type="button"
-                        >
-                            ANALYZE + GENERATE
-                        </button>
-                        <button
-                            id="cancelAnalyze"
-                            class="button button--secondary"
-                            type="button"
-                            hidden
-                        >
-                            CANCEL
-                        </button>
-                    </div>
-                </div>
-                <!-- MANUAL MODE -->
-                <section
-                    id="manualModePanel"
-                    class="manualModePanel"
-                >
-                    <div class="manualModePanel__intro">
-                        <p class="manualModePanel__eyebrow">
-                            MANUAL INPUT
-                        </p>
-                        <h3 class="manualModePanel__title">
-                            네일 정보를 직접 입력하세요.
-                        </h3>
-                        <p class="manualModePanel__description">
-                            SVG 파일이 없으면 기존 샘플 그래픽을 복사해 수정하거나,
-                            이 채팅에서 만든 SVG 코드를 붙여넣을 수 있습니다.
-                        </p>
-                    </div>
-                    <div class="fieldGrid fieldGrid--two">
-                        <div class="field">
-                            <label
-                                class="field__label"
-                                for="manualShape"
-                            >
-                                SHAPE
-                                <span aria-hidden="true">*</span>
-                            </label>
-                            <input
-                                id="manualShape"
-                                class="field__input"
-                                type="text"
-                                placeholder="예: 아몬드"
-                            >
-                            <p class="field__error"></p>
-                        </div>
-                        <div class="field">
-                            <label
-                                class="field__label"
-                                for="manualFinish"
-                            >
-                                FINISH
-                                <span aria-hidden="true">*</span>
-                            </label>
-                            <input
-                                id="manualFinish"
-                                class="field__input"
-                                type="text"
-                                placeholder="예: 자석, 그라데이션, 글리터"
-                            >
-                            <p class="field__help">
-                                쉼표로 구분하세요.
-                            </p>
-                            <p class="field__error"></p>
-                        </div>
-                    </div>
-                    <div class="field">
-                        <div class="field__heading">
-                            <div>
-                                <span class="field__label">
-                                    COLOR
-                                    <span aria-hidden="true">*</span>
-                                </span>
-                                <p class="field__help">
-                                    대표 컬러를 1~8개 추가하세요.
-                                </p>
-                            </div>
-                        </div>
-                        <div
-                            id="manualColors"
-                            class="generatedColors"
-                        >
-                        </div>
-                        <button
-                            id="addManualColor"
-                            class="generatedColors__add"
-                            type="button"
-                        >
-                            ＋ ADD COLOR
-                        </button>
-                        <p
-                            id="manualColorsError"
-                            class="field__error"
-                        ></p>
-                    </div>
-                    <div class="field">
-                        <div class="field__heading">
-                            <div>
-                                <label
-                                    class="field__label"
-                                    for="manualSvgFile"
-                                >
-                                    NAIL SVG FILE
-                                    <span class="field__optional">
-                                        OPTIONAL
-                                    </span>
-                                </label>
-                                <p class="field__help">
-                                    SVG 파일을 업로드하거나 아래 입력창에 SVG 코드를 붙여넣으세요.
-                                </p>
-                            </div>
-                        </div>
-                        <div
-                            id="manualSvgDropzone"
-                            class="dropzone dropzone--compact"
-                            tabindex="0"
-                            role="button"
-                            aria-controls="manualSvgFile"
-                        >
-                            <input
-                                id="manualSvgFile"
-                                class="dropzone__input"
-                                type="file"
-                                accept=".svg,image/svg+xml"
-                            >
-                            <div class="dropzone__content">
-                                <span
-                                    class="dropzone__icon"
-                                    aria-hidden="true"
-                                >
-                                    ＋
-                                </span>
-                                <p class="dropzone__title">
-                                    SVG 파일을 업로드하세요.
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="field">
-                        <div class="field__heading">
-                            <label
-                                class="field__label"
-                                for="manualSvgCode"
-                            >
-                                SVG CODE
-                                <span aria-hidden="true">*</span>
-                            </label>
-                            <button
-                                id="clearManualSvg"
-                                class="textButton"
-                                type="button"
-                            >
-                                CLEAR
-                            </button>
-                        </div>
-                        <textarea
-                            id="manualSvgCode"
-                            class="field__textarea manualModePanel__svgCode"
-                            rows="14"
-                            spellcheck="false"
-                            placeholder="<svg ...>...</svg>"
-                        ></textarea>
-                        <p
-                            id="manualSvgError"
-                            class="field__error"
-                        ></p>
-                    </div>
-                    <section class="manualGraphicPreview">
-                        <div class="manualGraphicPreview__heading">
-                            <h4 class="manualGraphicPreview__title">
-                                SVG PREVIEW
-                            </h4>
-                            <span
-                                id="manualSvgStatus"
-                                class="manualGraphicPreview__status"
-                            >
-                                SVG 코드를 입력하세요.
-                            </span>
-                        </div>
-                        <div
-                            id="manualSvgPreview"
-                            class="generatedGraphic"
-                        >
-                        </div>
-                    </section>
-                    <div class="stepActions stepActions--split">
-                        <button
-                            id="manualBackToInput"
-                            class="button button--secondary"
-                            type="button"
-                        >
-                            ← BACK
-                        </button>
-                        <button
-                            id="continueManualMode"
-                            class="button button--primary"
-                            type="button"
-                        >
-                            CONTINUE TO PREVIEW
-                            <span aria-hidden="true">
-                                →
-                            </span>
-                        </button>
-                    </div>
-                </section>
-            </section>
-            <!-- ==================================================
-                 STEP 3
-            =================================================== -->
-            <section
-                class="formStep"
-                data-step="3"
-                hidden
-            >
-                <div class="stepHeader">
-                    <p class="stepHeader__number">
-                        STEP 03
-                    </p>
-                    <h2 class="stepHeader__title">
-                        결과를 확인하세요.
-                    </h2>
-                    <p class="stepHeader__description">
-                        게시하기 전에 분석 결과와 네일 그래픽을 수정할 수 있습니다.
-                    </p>
-                </div>
-                <!-- GRAPHIC PREVIEW -->
-                <section class="previewSection">
-                    <div class="previewSection__heading">
-                        <h3 class="previewSection__title">
-                            NAIL GRAPHIC
-                        </h3>
-                        <button
-                            id="regenerateGraphic"
-                            class="textButton"
-                            type="button"
-                        >
-                            REGENERATE
-                        </button>
-                    </div>
-                    <div
-                        id="generatedNailGraphic"
-                        class="generatedGraphic"
-                    >
-                    </div>
-                </section>
-                <!-- NAIL EDITOR -->
-                <section
-                    id="nailEditor"
-                    class="nailEditor"
-                >
-                    <div class="nailEditor__heading">
-                        <div>
-                            <p class="nailEditor__eyebrow">
-                                FINGER EDITOR
-                            </p>
-                            <h3 class="nailEditor__title">
-                                수정할 손톱을 선택하세요.
-                            </h3>
-                        </div>
-                        <button
-                            id="clearFingerSelection"
-                            class="textButton"
-                            type="button"
-                            hidden
-                        >
-                            CLEAR SELECTION
-                        </button>
-                    </div>
-                    <div
-                        id="fingerSelector"
-                        class="fingerSelector"
-                        aria-label="수정할 손톱 선택"
-                    >
-                        <button
-                            class="fingerSelector__button"
-                            type="button"
-                            data-finger="left-thumb"
-                        >
-                            <span>왼손 엄지</span>
-                            <small>L1</small>
-                        </button>
-                        <button
-                            class="fingerSelector__button"
-                            type="button"
-                            data-finger="left-index"
-                        >
-                            <span>왼손 검지</span>
-                            <small>L2</small>
-                        </button>
-                        <button
-                            class="fingerSelector__button"
-                            type="button"
-                            data-finger="left-middle"
-                        >
-                            <span>왼손 중지</span>
-                            <small>L3</small>
-                        </button>
-                        <button
-                            class="fingerSelector__button"
-                            type="button"
-                            data-finger="left-ring"
-                        >
-                            <span>왼손 약지</span>
-                            <small>L4</small>
-                        </button>
-                        <button
-                            class="fingerSelector__button"
-                            type="button"
-                            data-finger="left-pinky"
-                        >
-                            <span>왼손 소지</span>
-                            <small>L5</small>
-                        </button>
-                        <span
-                            class="fingerSelector__divider"
-                            aria-hidden="true"
-                        ></span>
-                        <button
-                            class="fingerSelector__button"
-                            type="button"
-                            data-finger="right-thumb"
-                        >
-                            <span>오른손 엄지</span>
-                            <small>R1</small>
-                        </button>
-                        <button
-                            class="fingerSelector__button"
-                            type="button"
-                            data-finger="right-index"
-                        >
-                            <span>오른손 검지</span>
-                            <small>R2</small>
-                        </button>
-                        <button
-                            class="fingerSelector__button"
-                            type="button"
-                            data-finger="right-middle"
-                        >
-                            <span>오른손 중지</span>
-                            <small>R3</small>
-                        </button>
-                        <button
-                            class="fingerSelector__button"
-                            type="button"
-                            data-finger="right-ring"
-                        >
-                            <span>오른손 약지</span>
-                            <small>R4</small>
-                        </button>
-                        <button
-                            class="fingerSelector__button"
-                            type="button"
-                            data-finger="right-pinky"
-                        >
-                            <span>오른손 소지</span>
-                            <small>R5</small>
-                        </button>
-                    </div>
-                    <div class="nailEditor__form">
-                        <div class="field">
-                            <label
-                                class="field__label"
-                                for="fingerEditInstruction"
-                            >
-                                EDIT INSTRUCTION
-                            </label>
-                            <textarea
-                                id="fingerEditInstruction"
-                                class="field__textarea nailEditor__textarea"
-                                rows="4"
-                                maxlength="1000"
-                                disabled
-                                placeholder="먼저 수정할 손톱을 선택하세요."
-                            ></textarea>
-                            <p
-                                id="fingerEditHint"
-                                class="field__help"
-                            >
-                                선택한 손톱만 수정하고 나머지 손톱은 유지합니다.
-                            </p>
-                        </div>
-                        <div class="nailEditor__actions">
-                            <button
-                                id="applyFingerEdit"
-                                class="button button--primary"
-                                type="button"
-                                disabled
-                            >
-                                REGENERATE SELECTED NAIL
-                            </button>
-                        </div>
-                    </div>
-                    <section
-                        id="fingerEditProgress"
-                        class="analysisProgress"
-                        hidden
-                    >
-                        <div class="analysisProgress__header">
-                            <span id="fingerEditProgressLabel">
-                                선택한 손톱을 분석하고 있습니다.
-                            </span>
-                            <span id="fingerEditProgressValue">
-                                0%
-                            </span>
-                        </div>
-                        <div class="analysisProgress__track">
-                            <span
-                                id="fingerEditProgressBar"
-                                class="analysisProgress__bar"
-                            ></span>
-                        </div>
-                    </section>
-                </section>
-                <!-- GENERATED META -->
-                <section class="generatedMeta">
-                    <div class="generatedMeta__item">
-                        <label
-                            class="generatedMeta__label"
-                            for="generatedShape"
-                        >
-                            SHAPE
-                        </label>
-                        <input
-                            id="generatedShape"
-                            class="generatedMeta__input"
-                            name="generatedShape"
-                            type="text"
-                        >
-                    </div>
-                    <div class="generatedMeta__item">
-                        <label
-                            class="generatedMeta__label"
-                            for="generatedFinish"
-                        >
-                            FINISH
-                        </label>
-                        <input
-                            id="generatedFinish"
-                            class="generatedMeta__input"
-                            name="generatedFinish"
-                            type="text"
-                            placeholder="자석, 그라데이션, 글리터"
-                        >
-                        <p class="generatedMeta__help">
-                            쉼표로 구분하세요.
-                        </p>
-                    </div>
-                    <div class="generatedMeta__item">
-                        <span class="generatedMeta__label">
-                            COLOR
-                        </span>
-                        <div
-                            id="generatedColors"
-                            class="generatedColors"
-                        >
-                        </div>
-                        <button
-                            id="addGeneratedColor"
-                            class="generatedColors__add"
-                            type="button"
-                        >
-                            ＋ ADD COLOR
-                        </button>
-                    </div>
-                </section>
-                <!-- ARCHIVE PREVIEW -->
-                <section class="archivePreview">
-                    <div class="archivePreview__heading">
-                        <h3 class="archivePreview__title">
-                            ARCHIVE PREVIEW
-                        </h3>
-                        <span class="archivePreview__caption">
-                            실제 상세페이지 미리보기
-                        </span>
-                    </div>
-                    <iframe
-                        id="archivePreviewFrame"
-                        class="archivePreview__frame"
-                        title="네일 상세페이지 미리보기"
-                    >
-                    </iframe>
-                </section>
-                <!-- ACTION -->
-                <div class="stepActions stepActions--split">
-                    <button
-                        id="backToAnalyze"
-                        class="button button--secondary"
-                        type="button"
-                    >
-                        ← BACK
-                    </button>
-                    <button
-                        id="goToPublish"
-                        class="button button--primary"
-                        type="button"
-                    >
-                        CONTINUE TO PUBLISH
-                        <span aria-hidden="true">
-                            →
-                        </span>
-                    </button>
-                </div>
-            </section>
-            <!-- ==================================================
-                 STEP 4
-            =================================================== -->
-            <section
-                class="formStep"
-                data-step="4"
-                hidden
-            >
-                <div class="stepHeader">
-                    <p class="stepHeader__number">
-                        STEP 04
-                    </p>
-                    <h2 class="stepHeader__title">
-                        아카이브에 게시합니다.
-                    </h2>
-                    <p class="stepHeader__description">
-                        이미지와 데이터를 GitHub에 저장하고 공개 페이지를 업데이트합니다.
-                    </p>
-                </div>
-                <!-- PUBLISH SUMMARY -->
-                <section class="publishSummary">
-                    <div class="publishSummary__graphic">
-                        <div
-                            id="publishGraphicPreview"
-                            class="publishSummary__graphicImage"
-                        >
-                        </div>
-                    </div>
-                    <dl class="publishSummary__meta">
-                        <div>
-                            <dt>
-                                DATE
-                            </dt>
-                            <dd id="publishDate">
-                            </dd>
-                        </div>
-                        <div>
-                            <dt>
-                                TITLE
-                            </dt>
-                            <dd id="publishTitle">
-                            </dd>
-                        </div>
-                        <div>
-                            <dt>
-                                SHAPE
-                            </dt>
-                            <dd id="publishShape">
-                            </dd>
-                        </div>
-                        <div>
-                            <dt>
-                                FINISH
-                            </dt>
-                            <dd id="publishFinish">
-                            </dd>
-                        </div>
-                        <div>
-                            <dt>
-                                ORIGINAL PHOTOS
-                            </dt>
-                            <dd id="publishPhotoCount">
-                            </dd>
-                        </div>
-                    </dl>
-                </section>
-                <!-- PUBLISH CHECKBOX -->
-                <label class="confirmPublish">
-                    <input
-                        id="confirmPublish"
-                        class="confirmPublish__input"
-                        type="checkbox"
-                    >
-                    <span class="confirmPublish__control">
-                    </span>
-                    <span class="confirmPublish__text">
-                        미리보기와 정보를 확인했습니다.
-                    </span>
-                </label>
-                <!-- PUBLISH PROGRESS -->
-                <section
-                    id="publishProgress"
-                    class="analysisProgress"
-                    hidden
-                >
-                    <div class="analysisProgress__header">
-                        <span id="publishProgressLabel">
-                            파일을 준비하고 있습니다.
-                        </span>
-                        <span id="publishProgressValue">
-                            0%
-                        </span>
-                    </div>
-                    <div class="analysisProgress__track">
-                        <span
-                            id="publishProgressBar"
-                            class="analysisProgress__bar"
-                        >
-                        </span>
-                    </div>
-                </section>
-                <!-- ACTION -->
-                <div class="stepActions stepActions--split">
-                    <button
-                        id="backToPreview"
-                        class="button button--secondary"
-                        type="button"
-                    >
-                        ← BACK
-                    </button>
-                    <button
-                        id="publishArchive"
-                        class="button button--primary"
-                        type="submit"
-                        disabled
-                    >
-                        PUBLISH TO ARCHIVE
-                    </button>
-                </div>
-            </section>
-        </form>
-        <!-- ==================================================
-             SUCCESS
-        =================================================== -->
-        <section
-            id="publishSuccess"
-            class="publishSuccess"
-            hidden
-        >
-            <span
-                class="publishSuccess__icon"
-                aria-hidden="true"
-            >
-                ✓
-            </span>
-            <p class="publishSuccess__eyebrow">
-                PUBLISHED
-            </p>
-            <h2 class="publishSuccess__title">
-                새로운 네일 기록이<br>
-                아카이브에 추가되었습니다.
-            </h2>
-            <p
-                id="publishSuccessCommit"
-                class="publishSuccess__commit"
-            >
-            </p>
-            <div class="publishSuccess__actions">
-                <a
-                    id="viewPublishedArchive"
-                    class="button button--primary"
-                    href="/"
-                    target="_blank"
-                    rel="noopener"
-                >
-                    VIEW ARCHIVE ↗
-                </a>
                 <button
-                    id="createAnotherArchive"
-                    class="button button--secondary"
+                    id="prevButton"
+                    class="archiveNav__button"
                     type="button"
                 >
-                    CREATE ANOTHER
+                    ← PREVIOUS
                 </button>
-            </div>
+                <p
+                    id="pageCounter"
+                    class="archiveNav__counter"
+                    aria-live="polite"
+                >
+                    1 / 1
+                </p>
+                <button
+                    id="nextButton"
+                    class="archiveNav__button"
+                    type="button"
+                >
+                    NEXT →
+                </button>
+            </nav>
+            <!-- JS RENDERING AREA -->
+            <article
+                id="detailPage"
+                class="detailPage"
+                aria-live="polite"
+            >
+            </article>
         </section>
     </main>
-    <!-- ==================================================
-         SYSTEM DIAGNOSTICS
-    =================================================== -->
+    <!-- IMAGE LIGHTBOX -->
     <dialog
-        id="diagnosticsDialog"
-        class="diagnosticsDialog"
+        id="lightbox"
+        class="lightbox"
     >
-        <div class="diagnosticsDialog__content">
-            <div class="diagnosticsDialog__header">
-                <div>
-                    <p class="diagnosticsDialog__eyebrow">
-                        SYSTEM STATUS
-                    </p>
-                    <h2 class="diagnosticsDialog__title">
-                        연결 상태를 확인합니다.
-                    </h2>
+        <button
+            id="lightboxClose"
+            class="lightbox__close"
+            type="button"
+            aria-label="이미지 닫기"
+        >
+            ×
+        </button>
+        <img
+            id="lightboxImage"
+            class="lightbox__image"
+            src=""
+            alt=""
+        >
+    </dialog>
+    <!-- DETAIL TEMPLATE -->
+    <template id="detailTemplate">
+        <section class="entry">
+            <!-- DATE + TITLE -->
+            <header class="entryHeader">
+                <time class="entryDate">
+                    <span class="entryDate__day"></span>
+                    <span class="entryDate__month"></span>
+                    <span class="entryDate__year"></span>
+                </time>
+                <div class="entryHeading">
+                    <p class="entryHeading__number"></p>
+                    <h2 class="entryHeading__title"></h2>
                 </div>
-                <button
-                    id="closeDiagnostics"
-                    class="diagnosticsDialog__close"
-                    type="button"
-                    aria-label="진단 창 닫기"
-                >
-                    ×
-                </button>
-            </div>
-            <div
-                id="diagnosticsLoading"
-                class="diagnosticsLoading"
-            >
-                시스템 상태를 확인하고 있습니다.
-            </div>
+            </header>
+            <!-- NAIL GRAPHIC -->
             <section
-                id="diagnosticsResult"
-                class="diagnosticsResult"
-                hidden
+                class="nailGraphicSection"
+                aria-labelledby="nailGraphicTitle"
             >
-                <div class="diagnosticsResult__summary">
-                    <span
-                        id="diagnosticsStatusIcon"
-                        class="diagnosticsResult__icon"
-                        aria-hidden="true"
-                    >
-                    </span>
-                    <div>
-                        <strong
-                            id="diagnosticsStatusTitle"
-                            class="diagnosticsResult__title"
-                        >
-                        </strong>
-                        <p
-                            id="diagnosticsStatusDescription"
-                            class="diagnosticsResult__description"
-                        >
-                        </p>
-                    </div>
+                <h3
+                    id="nailGraphicTitle"
+                    class="sectionLabel"
+                >
+                    NAIL GRAPHIC
+                </h3>
+                <div class="nailGraphic">
+                    <!-- SVG inserted by app.js -->
                 </div>
-                <dl class="diagnosticsList">
-                    <div>
-                        <dt>PUBLIC ARCHIVE</dt>
-                        <dd id="diagnosticArchive"></dd>
-                    </div>
-                    <div>
-                        <dt>AI ANALYSIS</dt>
-                        <dd id="diagnosticAI"></dd>
-                    </div>
-                    <div>
-                        <dt>FINGER EDITOR</dt>
-                        <dd id="diagnosticFingerEditor"></dd>
-                    </div>
-                    <div>
-                        <dt>GITHUB PUBLISH</dt>
-                        <dd id="diagnosticPublish"></dd>
-                    </div>
-                    <div>
-                        <dt>REPOSITORY</dt>
-                        <dd id="diagnosticRepository"></dd>
-                    </div>
-                    <div>
-                        <dt>BRANCH</dt>
-                        <dd id="diagnosticBranch"></dd>
-                    </div>
-                    <div>
-                        <dt>ENVIRONMENT</dt>
-                        <dd id="diagnosticEnvironment"></dd>
-                    </div>
-                </dl>
-                <section
-                    id="missingVariables"
-                    class="missingVariables"
-                    hidden
-                >
-                    <p class="missingVariables__label">
-                        MISSING ENVIRONMENT VARIABLES
-                    </p>
-                    <ul
-                        id="missingVariablesList"
-                        class="missingVariables__list"
-                    >
-                    </ul>
-                </section>
             </section>
-            <div class="diagnosticsDialog__actions">
-                <button
-                    id="refreshDiagnostics"
-                    class="button button--secondary"
-                    type="button"
+            <!-- META -->
+            <section
+                class="nailMeta"
+                aria-label="네일 디자인 정보"
+            >
+                <div class="nailMeta__item">
+                    <span class="nailMeta__label">
+                        SHAPE
+                    </span>
+                    <span class="nailMeta__shape"></span>
+                </div>
+                <span
+                    class="nailMeta__divider"
+                    aria-hidden="true"
+                ></span>
+                <div class="nailMeta__item">
+                    <span class="nailMeta__label">
+                        FINISH
+                    </span>
+                    <div class="nailMeta__finish"></div>
+                </div>
+                <span
+                    class="nailMeta__divider"
+                    aria-hidden="true"
+                ></span>
+                <div class="nailMeta__item">
+                    <span class="nailMeta__label">
+                        COLOR
+                    </span>
+                    <div class="nailMeta__colors"></div>
+                </div>
+            </section>
+            <!-- INSPIRATION -->
+            <section
+                class="contentSection inspirationSection"
+                aria-labelledby="inspirationTitle"
+            >
+                <h3
+                    id="inspirationTitle"
+                    class="sectionLabel"
                 >
-                    REFRESH
-                </button>
-                <button
-                    id="doneDiagnostics"
-                    class="button button--primary"
-                    type="button"
-                >
-                    DONE
-                </button>
-            </div>
-        </div>
-    </dialog>
-    <!-- ==================================================
-         REMOVE IMAGE CONFIRM
-    =================================================== -->
-    <dialog
-        id="removeImageDialog"
-        class="confirmDialog"
-    >
-        <div class="confirmDialog__content">
-            <h2 class="confirmDialog__title">
-                이 사진을 삭제할까요?
-            </h2>
-            <p class="confirmDialog__description">
-                입력 목록에서만 제거되며 원본 파일은 삭제되지 않습니다.
-            </p>
-            <div class="confirmDialog__actions">
-                <button
-                    id="cancelRemoveImage"
-                    class="button button--secondary"
-                    type="button"
-                >
-                    CANCEL
-                </button>
-                <button
-                    id="confirmRemoveImage"
-                    class="button button--danger"
-                    type="button"
-                >
-                    REMOVE
-                </button>
-            </div>
-        </div>
-    </dialog>
+                    INSPIRATION
+                </h3>
+                <div class="inspiration">
+                    <button
+                        class="inspiration__imageButton"
+                        type="button"
+                        aria-label="인스퍼레이션 이미지 확대"
+                    >
+                        <img
+                            class="inspiration__image"
+                            src=""
+                            alt="네일 인스퍼레이션 이미지"
+                        >
+                    </button>
+                    <p class="inspiration__memo"></p>
+                </div>
+            </section>
+            <!-- ORIGINAL PHOTO -->
+            <section
+                class="contentSection originalSection"
+                aria-labelledby="originalPhotoTitle"
+            >
+                <div class="sectionHeading">
+                    <h3
+                        id="originalPhotoTitle"
+                        class="sectionLabel"
+                    >
+                        MY ORIGINAL PHOTO
+                    </h3>
+                    <button
+                        class="originalSection__more"
+                        type="button"
+                        hidden
+                    >
+                        VIEW ALL
+                    </button>
+                </div>
+                <div class="originalPhoto">
+                    <button
+                        class="originalPhoto__main"
+                        type="button"
+                        aria-label="대표 원본 사진 확대"
+                    >
+                        <img
+                            class="originalPhoto__mainImage"
+                            src=""
+                            alt="실제 네일 대표 사진"
+                        >
+                    </button>
+                    <div class="originalPhoto__preview"></div>
+                </div>
+            </section>
+        </section>
+    </template>
     <script
-        src="/admin/admin.js"
+        src="./js/app.js"
         defer
     ></script>
 </body>

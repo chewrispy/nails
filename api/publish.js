@@ -1,6 +1,6 @@
 /* ==========================================================
    NAILS DONE.
-   Atomic Publish API
+   Atomic Publish API (v2 — JSON / Base64)
 ========================================================== */
 const GITHUB_API = "https://api.github.com";
 const REPOSITORY =
@@ -11,7 +11,7 @@ const BRANCH =
     "main";
 const GITHUB_TOKEN =
     process.env.GITHUB_TOKEN;
-const MAX_PHOTOS = 6;
+const MAX_PHOTOS = 8;
 const MAX_IMAGE_LENGTH =
     12 * 1024 * 1024;
 /* ==========================================================
@@ -61,7 +61,7 @@ function authenticate(request) {
 /* ==========================================================
    VALIDATION
 ========================================================== */
-function validateDataURL(value) {
+function isDataURL(value) {
     return (
         typeof value === "string" &&
         /^data:image\/[a-zA-Z0-9.+-]+;base64,/.test(
@@ -70,6 +70,25 @@ function validateDataURL(value) {
         value.length <=
             MAX_IMAGE_LENGTH
     );
+}
+function validateImageFile(file, label) {
+    if (
+        !file ||
+        typeof file !== "object" ||
+        !isDataURL(file.data)
+    ) {
+        throw new Error(
+            `${label} 이미지 데이터가 올바르지 않습니다.`
+        );
+    }
+    return {
+        name:
+            String(
+                file.name || ""
+            ).trim(),
+        data:
+            file.data
+    };
 }
 function normalizeFinish(value) {
     if (!Array.isArray(value)) {
@@ -135,49 +154,42 @@ function validateRequest(body) {
         );
     }
     const graphic =
-        String(body.graphic || "").trim();
-    if (!graphic) {
-        throw new Error(
-            "네일 그래픽이 없습니다."
+        validateImageFile(
+            body.graphic,
+            "네일 그래픽"
         );
-    }
-    const photos =
+    const photosInput =
         Array.isArray(body.photos)
             ? body.photos
             : [];
-    if (!photos.length) {
+    if (!photosInput.length) {
         throw new Error(
             "원본 손 사진이 필요합니다."
         );
     }
     if (
-        photos.length >
+        photosInput.length >
         MAX_PHOTOS
     ) {
         throw new Error(
             `원본 사진은 최대 ${MAX_PHOTOS}장까지 게시할 수 있습니다.`
         );
     }
-    if (
-        photos.some(
-            (photo) =>
-                !validateDataURL(photo)
-        )
-    ) {
-        throw new Error(
-            "올바르지 않거나 너무 큰 원본 사진이 포함되어 있습니다."
+    const photos =
+        photosInput.map(
+            (file) =>
+                validateImageFile(
+                    file,
+                    "원본 손 사진"
+                )
         );
-    }
-    const reference =
-        body.reference || "";
-    if (
-        reference &&
-        !validateDataURL(reference)
-    ) {
-        throw new Error(
-            "인스퍼레이션 이미지 형식이 올바르지 않습니다."
-        );
-    }
+    const inspiration =
+        body.inspiration
+            ? validateImageFile(
+                  body.inspiration,
+                  "인스퍼레이션"
+              )
+            : null;
     return {
         date,
         title:
@@ -197,161 +209,29 @@ function validateRequest(body) {
             normalizeColors(
                 body.colors
             ),
+        graphic,
         photos,
-        reference,
-        graphic
+        inspiration
     };
-}
-/* ==========================================================
-   SVG
-========================================================== */
-const REQUIRED_FINGER_IDS = [
-    "left-thumb",
-    "left-index",
-    "left-middle",
-    "left-ring",
-    "left-pinky",
-    "right-thumb",
-    "right-index",
-    "right-middle",
-    "right-ring",
-    "right-pinky"
-];
-function sanitizeSVG(svg) {
-    let cleaned =
-        String(svg || "")
-            .trim()
-            .replace(
-                /^```(?:svg|xml)?\s*/i,
-                ""
-            )
-            .replace(
-                /```$/i,
-                ""
-            )
-            .trim();
-    const start =
-        cleaned.indexOf("<svg");
-    const end =
-        cleaned.lastIndexOf(
-            "</svg>"
-        );
-    if (
-        start === -1 ||
-        end === -1
-    ) {
-        throw new Error(
-            "올바른 SVG 그래픽이 아닙니다."
-        );
-    }
-    cleaned = cleaned.slice(
-        start,
-        end + 6
-    );
-    const forbiddenPatterns = [
-        /<script[\s\S]*?<\/script>/gi,
-        /<foreignObject[\s\S]*?<\/foreignObject>/gi,
-        /<iframe[\s\S]*?<\/iframe>/gi,
-        /<object[\s\S]*?<\/object>/gi,
-        /<embed[\s\S]*?>/gi,
-        /\son[a-z]+\s*=\s*"[^"]*"/gi,
-        /\son[a-z]+\s*=\s*'[^']*'/gi,
-        /\son[a-z]+\s*=\s*[^\s>]+/gi,
-        /javascript:/gi,
-        /\bhref\s*=\s*["']https?:[^"']*["']/gi,
-        /\bxlink:href\s*=\s*["']https?:[^"']*["']/gi,
-        /\bhref\s*=\s*["']data:[^"']*["']/gi,
-        /\bxlink:href\s*=\s*["']data:[^"']*["']/gi
-    ];
-    forbiddenPatterns.forEach(
-        (pattern) => {
-            cleaned =
-                cleaned.replace(
-                    pattern,
-                    ""
-                );
-        }
-    );
-    if (
-        cleaned.length >
-        300000
-    ) {
-        throw new Error(
-            "SVG 파일이 너무 큽니다."
-        );
-    }
-    return cleaned;
-}
-function validateFingerGroups(svg) {
-    for (
-        const fingerId
-        of REQUIRED_FINGER_IDS
-    ) {
-        const escaped =
-            fingerId.replace(
-                /[-/\\^$*+?.()|[\]{}]/g,
-                "\\$&"
-            );
-        const pattern =
-            new RegExp(
-                `<g\\b(?=[^>]*\\bid=["']${escaped}["'])(?=[^>]*\\bdata-finger=["']${escaped}["'])[^>]*>`,
-                "i"
-            );
-        if (!pattern.test(svg)) {
-            throw new Error(
-                `SVG에 손가락 그룹이 누락되었습니다: ${fingerId}`
-            );
-        }
-    }
-    const attributes =
-        svg.match(
-            /\bdata-finger\s*=\s*["'][^"']+["']/gi
-        ) || [];
-    if (
-        attributes.length !==
-        REQUIRED_FINGER_IDS.length
-    ) {
-        throw new Error(
-            "SVG에는 data-finger 그룹이 정확히 10개 있어야 합니다."
-        );
-    }
-    return svg;
 }
 /* ==========================================================
    DATA URL
 ========================================================== */
-function parseDataURL(dataURL) {
-    const match =
-        String(dataURL).match(
-            /^data:([^;,]+);base64,(.+)$/
+function decodeDataURL(dataURL) {
+    if (!dataURL) {
+        return null;
+    }
+    const base64 =
+        String(dataURL).replace(
+            /^data:.*?;base64,/,
+            ""
         );
-    if (!match) {
+    if (!base64) {
         throw new Error(
-            "이미지 데이터 형식이 올바르지 않습니다."
+            "이미지 데이터가 비어 있습니다."
         );
     }
-    const mimeType = match[1];
-    const content = match[2];
-    const extensionMap = {
-        "image/jpeg": "jpg",
-        "image/jpg": "jpg",
-        "image/png": "png",
-        "image/webp": "webp",
-        "image/heic": "heic",
-        "image/heif": "heif"
-    };
-    const extension =
-        extensionMap[mimeType];
-    if (!extension) {
-        throw new Error(
-            `지원하지 않는 이미지 형식입니다: ${mimeType}`
-        );
-    }
-    return {
-        mimeType,
-        extension,
-        content
-    };
+    return base64;
 }
 /* ==========================================================
    GITHUB API
@@ -656,44 +536,91 @@ function mergeArchiveRecord(
 }
 /* ==========================================================
    FILE PREPARATION
+   이미지는 원본 확장자를 그대로 유지해서 저장한다.
+   서버에 sharp 등 실제 포맷 변환 라이브러리가 없는 이상,
+   파일명만 .webp로 바꾸면 내용물과 확장자가 불일치하는
+   손상된 파일이 만들어지므로 이 방식은 쓰지 않는다.
 ========================================================== */
+const KNOWN_IMAGE_EXTENSIONS = [
+    "webp",
+    "png",
+    "jpg",
+    "jpeg",
+    "heic",
+    "heif",
+    "gif"
+];
+function extensionFromMime(dataURL) {
+    const match =
+        String(dataURL).match(
+            /^data:image\/([a-zA-Z0-9.+-]+);base64,/
+        );
+    if (!match) {
+        return "";
+    }
+    const mime =
+        match[1].toLowerCase();
+    if (mime === "jpeg") {
+        return "jpg";
+    }
+    return mime;
+}
+function extensionFromFile(file) {
+    const fromName =
+        String(file.name || "")
+            .split(".")
+            .pop()
+            ?.toLowerCase();
+    if (
+        fromName &&
+        KNOWN_IMAGE_EXTENSIONS.includes(
+            fromName
+        )
+    ) {
+        return fromName;
+    }
+    const fromMime =
+        extensionFromMime(file.data);
+    return fromMime || "webp";
+}
+async function uploadImageBlob(
+    path,
+    file,
+    treeEntries
+) {
+    const base64 =
+        decodeDataURL(file.data);
+    const blob =
+        await createBase64Blob(
+            base64
+        );
+    treeEntries.push(
+        createTreeEntry(
+            path,
+            blob.sha
+        )
+    );
+    return path;
+}
 async function prepareBlobs(data) {
     const folder =
         `assets/nails/${sanitizeFileSegment(data.date)}`;
     const treeEntries = [];
-    const graphicSVG =
-        validateFingerGroups(
-            sanitizeSVG(data.graphic)
-        );
-    const graphicBlob =
-        await createTextBlob(
-            `${graphicSVG}\n`
-        );
     const graphicPath =
-        `${folder}/nail-graphic.svg`;
-    treeEntries.push(
-        createTreeEntry(
-            graphicPath,
-            graphicBlob.sha
-        )
+        `${folder}/nail-graphic.${extensionFromFile(data.graphic)}`;
+    await uploadImageBlob(
+        graphicPath,
+        data.graphic,
+        treeEntries
     );
     let inspirationPath = "";
-    if (data.reference) {
-        const file =
-            parseDataURL(
-                data.reference
-            );
+    if (data.inspiration) {
         inspirationPath =
-            `${folder}/inspiration.${file.extension}`;
-        const blob =
-            await createBase64Blob(
-                file.content
-            );
-        treeEntries.push(
-            createTreeEntry(
-                inspirationPath,
-                blob.sha
-            )
+            `${folder}/inspiration.${extensionFromFile(data.inspiration)}`;
+        await uploadImageBlob(
+            inspirationPath,
+            data.inspiration,
+            treeEntries
         );
     }
     const photoPaths = [];
@@ -702,26 +629,17 @@ async function prepareBlobs(data) {
         index < data.photos.length;
         index += 1
     ) {
-        const file =
-            parseDataURL(
-                data.photos[index]
-            );
         const number =
             String(index + 1)
                 .padStart(2, "0");
         const path =
-            `${folder}/original-${number}.${file.extension}`;
-        const blob =
-            await createBase64Blob(
-                file.content
-            );
-        photoPaths.push(path);
-        treeEntries.push(
-            createTreeEntry(
-                path,
-                blob.sha
-            )
+            `${folder}/original-${number}.${extensionFromFile(data.photos[index])}`;
+        await uploadImageBlob(
+            path,
+            data.photos[index],
+            treeEntries
         );
+        photoPaths.push(path);
     }
     return {
         folder,
@@ -830,7 +748,7 @@ export default async function handler(
                 data.date
             );
         /*
-         * 3. 이미지와 SVG blob을 만든다.
+         * 3. 이미지 blob을 만든다.
          * 이 시점에는 아직 브랜치에 노출되지 않는다.
          */
         const prepared =

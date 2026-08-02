@@ -2,85 +2,422 @@
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
+
     <meta
         name="viewport"
         content="width=device-width, initial-scale=1.0"
     >
+
     <meta
         name="description"
-        content="Personal Nail Archive"
+        content="나의 네일아트 기록을 모아두는 개인 아카이브"
     >
+
     <meta
         name="theme-color"
         content="#ffffff"
     >
+
     <title>NAILS DONE.</title>
+
     <link
         rel="stylesheet"
         href="./css/style.css"
     >
 </head>
+
 <body>
-    <main class="page">
-        <!-- HERO -->
-        <section
-            class="hero"
-            aria-labelledby="siteTitle"
-        >
-            <p class="hero__caption">
-                PERSONAL NAIL ARCHIVE
+
+    <main class="archive">
+
+        <!-- ==================================================
+             HERO
+        =================================================== -->
+
+        <section class="hero">
+
+            <div class="hero__heading">
+
+                <p class="hero__eyebrow">
+                    PERSONAL NAIL ARCHIVE
+                </p>
+
+                <h1 class="hero__title">
+                    NAILS
+                    <span>DONE.</span>
+                </h1>
+
+            </div>
+
+            <p class="hero__description">
+                계절과 기분, 특별했던 순간을 담아온
+                나의 네일아트 기록.
             </p>
-            <h1
-                id="siteTitle"
-                class="hero__title"
-            >
-                <span>NAILS</span>
-                <span>DONE.</span>
-            </h1>
+
         </section>
-        <!-- ARCHIVE DETAIL -->
-        <section class="archive">
-            <!-- PREVIOUS / NEXT -->
-            <nav
-                class="archiveNav"
-                aria-label="네일 기록 이동"
+
+
+        <!-- ==================================================
+             VIEW CONTROLS
+        =================================================== -->
+
+        <section class="archiveToolbar">
+
+            <div class="archiveToolbar__summary">
+
+                <span
+                    id="archiveCount"
+                    class="archiveToolbar__count"
+                >
+                    0 RECORDS
+                </span>
+
+                <span
+                    id="archivePeriod"
+                    class="archiveToolbar__period"
+                >
+                </span>
+
+            </div>
+
+
+            <div
+                class="viewSwitcher"
+                aria-label="아카이브 보기 방식"
             >
+
                 <button
-                    id="prevButton"
-                    class="archiveNav__button"
+                    class="viewSwitcher__button is-active"
                     type="button"
+                    data-view="grid"
+                    aria-pressed="true"
+                >
+                    GRID
+                </button>
+
+                <button
+                    class="viewSwitcher__button"
+                    type="button"
+                    data-view="list"
+                    aria-pressed="false"
+                >
+                    LIST
+                </button>
+
+                <button
+                    class="viewSwitcher__button"
+                    type="button"
+                    data-view="detail"
+                    aria-pressed="false"
+                >
+                    DETAIL
+                </button>
+
+            </div>
+
+        </section>
+
+
+        <!-- ==================================================
+             GRID / LIST ARCHIVE
+        =================================================== -->
+
+        <section
+            id="archiveCollection"
+            class="archiveCollection archiveCollection--grid"
+            aria-live="polite"
+        >
+        </section>
+
+
+        <!-- ==================================================
+             DETAIL VIEW
+        =================================================== -->
+
+        <section
+            id="detailView"
+            class="detailView"
+            hidden
+        >
+
+            <div class="detailView__navigation">
+
+                <button
+                    id="detailPrevious"
+                    class="detailView__navButton"
+                    type="button"
+                    aria-label="이전 네일 기록"
                 >
                     ← PREVIOUS
                 </button>
-                <p
-                    id="pageCounter"
-                    class="archiveNav__counter"
-                    aria-live="polite"
+
+                <span
+                    id="detailCounter"
+                    class="detailView__counter"
                 >
                     1 / 1
-                </p>
+                </span>
+
                 <button
-                    id="nextButton"
-                    class="archiveNav__button"
+                    id="detailNext"
+                    class="detailView__navButton"
                     type="button"
+                    aria-label="다음 네일 기록"
                 >
                     NEXT →
                 </button>
-            </nav>
-            <!-- JS RENDERING AREA -->
+
+            </div>
+
+
             <article
-                id="detailPage"
-                class="detailPage"
-                aria-live="polite"
+                id="detailArticle"
+                class="nailDetail"
             >
             </article>
+
         </section>
+
+
+        <!-- ==================================================
+             EMPTY / ERROR STATE
+        =================================================== -->
+
+        <section
+            id="archiveMessage"
+            class="archiveMessage"
+            hidden
+        >
+
+            <h2
+                id="archiveMessageTitle"
+                class="archiveMessage__title"
+            >
+            </h2>
+
+            <p
+                id="archiveMessageText"
+                class="archiveMessage__text"
+            >
+            </p>
+
+        </section>
+
     </main>
-    <!-- IMAGE LIGHTBOX -->
+
+
+    <!-- ==================================================
+         CARD TEMPLATE
+    =================================================== -->
+
+    <template id="archiveCardTemplate">
+
+        <article class="archiveCard">
+
+            <button
+                class="archiveCard__button"
+                type="button"
+            >
+
+                <div class="archiveCard__visual">
+
+                    <img
+                        class="archiveCard__graphic"
+                        alt=""
+                    >
+
+                </div>
+
+                <div class="archiveCard__content">
+
+                    <time class="archiveCard__date">
+                    </time>
+
+                    <h2 class="archiveCard__title">
+                    </h2>
+
+                    <div class="archiveCard__meta">
+
+                        <span class="archiveCard__shape">
+                        </span>
+
+                        <span
+                            class="archiveCard__finish"
+                            aria-label="네일 특징"
+                        >
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </button>
+
+        </article>
+
+    </template>
+
+
+    <!-- ==================================================
+         DETAIL TEMPLATE
+    =================================================== -->
+
+    <template id="detailTemplate">
+
+        <header class="nailDetail__header">
+
+            <div>
+
+                <time class="nailDetail__date">
+                </time>
+
+                <h2 class="nailDetail__title">
+                </h2>
+
+            </div>
+
+            <span class="nailDetail__number">
+            </span>
+
+        </header>
+
+
+        <!-- NAIL GRAPHIC -->
+
+        <section class="detailSection detailSection--graphic">
+
+            <div class="detailSection__heading">
+
+                <h3 class="detailSection__label">
+                    NAIL GRAPHIC
+                </h3>
+
+            </div>
+
+            <button
+                class="nailGraphicButton"
+                type="button"
+                aria-label="네일 그래픽 크게 보기"
+            >
+
+                <img
+                    class="nailGraphicImage"
+                    alt=""
+                >
+
+            </button>
+
+
+            <dl class="nailMeta">
+
+                <div class="nailMeta__item">
+
+                    <dt>
+                        SHAPE
+                    </dt>
+
+                    <dd class="nailMeta__shape">
+                    </dd>
+
+                </div>
+
+
+                <div class="nailMeta__item">
+
+                    <dt>
+                        FINISH
+                    </dt>
+
+                    <dd class="nailMeta__finish">
+                    </dd>
+
+                </div>
+
+
+                <div class="nailMeta__item">
+
+                    <dt>
+                        COLOR
+                    </dt>
+
+                    <dd class="nailMeta__colors">
+                    </dd>
+
+                </div>
+
+            </dl>
+
+        </section>
+
+
+        <!-- INSPIRATION -->
+
+        <section class="detailSection inspirationSection">
+
+            <div class="detailSection__heading">
+
+                <h3 class="detailSection__label">
+                    INSPIRATION
+                </h3>
+
+            </div>
+
+            <div class="inspiration">
+
+                <button
+                    class="inspiration__imageButton"
+                    type="button"
+                    aria-label="인스퍼레이션 이미지 크게 보기"
+                >
+
+                    <img
+                        class="inspiration__image"
+                        alt=""
+                    >
+
+                </button>
+
+                <p class="inspiration__memo">
+                </p>
+
+            </div>
+
+        </section>
+
+
+        <!-- ORIGINAL PHOTO -->
+
+        <section class="detailSection originalSection">
+
+            <div class="detailSection__heading">
+
+                <h3 class="detailSection__label">
+                    MY ORIGINAL PHOTO
+                </h3>
+
+                <span class="detailSection__caption">
+                    사진을 클릭하면 크게 볼 수 있어요.
+                </span>
+
+            </div>
+
+            <div class="originalGallery">
+            </div>
+
+        </section>
+
+    </template>
+
+
+    <!-- ==================================================
+         LIGHTBOX
+    =================================================== -->
+
     <dialog
         id="lightbox"
         class="lightbox"
     >
+
         <button
             id="lightboxClose"
             class="lightbox__close"
@@ -89,141 +426,48 @@
         >
             ×
         </button>
-        <img
-            id="lightboxImage"
-            class="lightbox__image"
-            src=""
-            alt=""
+
+        <button
+            id="lightboxPrevious"
+            class="lightbox__navigation lightbox__navigation--previous"
+            type="button"
+            aria-label="이전 이미지"
         >
+            ←
+        </button>
+
+        <figure class="lightbox__figure">
+
+            <img
+                id="lightboxImage"
+                class="lightbox__image"
+                alt=""
+            >
+
+            <figcaption
+                id="lightboxCaption"
+                class="lightbox__caption"
+            >
+            </figcaption>
+
+        </figure>
+
+        <button
+            id="lightboxNext"
+            class="lightbox__navigation lightbox__navigation--next"
+            type="button"
+            aria-label="다음 이미지"
+        >
+            →
+        </button>
+
     </dialog>
-    <!-- DETAIL TEMPLATE -->
-    <template id="detailTemplate">
-        <section class="entry">
-            <!-- DATE + TITLE -->
-            <header class="entryHeader">
-                <time class="entryDate">
-                    <span class="entryDate__day"></span>
-                    <span class="entryDate__month"></span>
-                    <span class="entryDate__year"></span>
-                </time>
-                <div class="entryHeading">
-                    <p class="entryHeading__number"></p>
-                    <h2 class="entryHeading__title"></h2>
-                </div>
-            </header>
-            <!-- NAIL GRAPHIC -->
-            <section
-                class="nailGraphicSection"
-                aria-labelledby="nailGraphicTitle"
-            >
-                <h3
-                    id="nailGraphicTitle"
-                    class="sectionLabel"
-                >
-                    NAIL GRAPHIC
-                </h3>
-                <div class="nailGraphic">
-                    <!-- SVG inserted by app.js -->
-                </div>
-            </section>
-            <!-- META -->
-            <section
-                class="nailMeta"
-                aria-label="네일 디자인 정보"
-            >
-                <div class="nailMeta__item">
-                    <span class="nailMeta__label">
-                        SHAPE
-                    </span>
-                    <span class="nailMeta__shape"></span>
-                </div>
-                <span
-                    class="nailMeta__divider"
-                    aria-hidden="true"
-                ></span>
-                <div class="nailMeta__item">
-                    <span class="nailMeta__label">
-                        FINISH
-                    </span>
-                    <div class="nailMeta__finish"></div>
-                </div>
-                <span
-                    class="nailMeta__divider"
-                    aria-hidden="true"
-                ></span>
-                <div class="nailMeta__item">
-                    <span class="nailMeta__label">
-                        COLOR
-                    </span>
-                    <div class="nailMeta__colors"></div>
-                </div>
-            </section>
-            <!-- INSPIRATION -->
-            <section
-                class="contentSection inspirationSection"
-                aria-labelledby="inspirationTitle"
-            >
-                <h3
-                    id="inspirationTitle"
-                    class="sectionLabel"
-                >
-                    INSPIRATION
-                </h3>
-                <div class="inspiration">
-                    <button
-                        class="inspiration__imageButton"
-                        type="button"
-                        aria-label="인스퍼레이션 이미지 확대"
-                    >
-                        <img
-                            class="inspiration__image"
-                            src=""
-                            alt="네일 인스퍼레이션 이미지"
-                        >
-                    </button>
-                    <p class="inspiration__memo"></p>
-                </div>
-            </section>
-            <!-- ORIGINAL PHOTO -->
-            <section
-                class="contentSection originalSection"
-                aria-labelledby="originalPhotoTitle"
-            >
-                <div class="sectionHeading">
-                    <h3
-                        id="originalPhotoTitle"
-                        class="sectionLabel"
-                    >
-                        MY ORIGINAL PHOTO
-                    </h3>
-                    <button
-                        class="originalSection__more"
-                        type="button"
-                        hidden
-                    >
-                        VIEW ALL
-                    </button>
-                </div>
-                <div class="originalPhoto">
-                    <button
-                        class="originalPhoto__main"
-                        type="button"
-                        aria-label="대표 원본 사진 확대"
-                    >
-                        <img
-                            class="originalPhoto__mainImage"
-                            src=""
-                            alt="실제 네일 대표 사진"
-                        >
-                    </button>
-                    <div class="originalPhoto__preview"></div>
-                </div>
-            </section>
-        </section>
-    </template>
+
+
     <script
         src="./js/app.js"
         defer
     ></script>
+
 </body>
 </html>

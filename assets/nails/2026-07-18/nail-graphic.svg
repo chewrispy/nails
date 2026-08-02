@@ -1,0 +1,386 @@
+<svg
+  xmlns="http://www.w3.org/2000/svg"
+  viewBox="0 0 1240 260"
+  role="img"
+  aria-labelledby="title description"
+>
+  <title id="title">Summer Glitter 네일 그래픽</title>
+  <desc id="description">
+    왼손 다섯 개와 오른손 다섯 개를 일렬로 배치한
+    보라색 자석 그라데이션 및 글리터 네일 그래픽
+  </desc>
+  <defs>
+    <!-- 기본 보라 그라데이션 -->
+    <linearGradient id="purpleGradient" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#9858FF"/>
+      <stop offset="42%" stop-color="#C885F3"/>
+      <stop offset="76%" stop-color="#E8B9E5"/>
+      <stop offset="100%" stop-color="#F7E7F0"/>
+    </linearGradient>
+    <linearGradient id="purpleGradientLight" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#B56CFF"/>
+      <stop offset="48%" stop-color="#D9A3F3"/>
+      <stop offset="100%" stop-color="#F4D7E8"/>
+    </linearGradient>
+    <linearGradient id="purpleGradientDeep" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#7D41EC"/>
+      <stop offset="46%" stop-color="#B66EDF"/>
+      <stop offset="100%" stop-color="#ECCCE6"/>
+    </linearGradient>
+    <!-- 자석광 -->
+    <radialGradient id="magneticGlow" cx="42%" cy="22%" r="80%">
+      <stop offset="0%" stop-color="#FFFFFF" stop-opacity=".9"/>
+      <stop offset="24%" stop-color="#F3CFFF" stop-opacity=".65"/>
+      <stop offset="62%" stop-color="#BC7CF0" stop-opacity=".12"/>
+      <stop offset="100%" stop-color="#8B52DE" stop-opacity="0"/>
+    </radialGradient>
+    <!-- 유리광 -->
+    <linearGradient id="glassHighlight" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#FFFFFF" stop-opacity=".8"/>
+      <stop offset="50%" stop-color="#FFFFFF" stop-opacity=".12"/>
+      <stop offset="100%" stop-color="#FFFFFF" stop-opacity="0"/>
+    </linearGradient>
+    <!-- 그림자 -->
+    <filter id="nailShadow" x="-35%" y="-30%" width="170%" height="190%">
+      <feDropShadow
+        dx="0"
+        dy="14"
+        stdDeviation="10"
+        flood-color="#4A2D62"
+        flood-opacity=".18"
+      />
+    </filter>
+    <!-- 글리터 -->
+    <filter id="glitterGlow" x="-100%" y="-100%" width="300%" height="300%">
+      <feGaussianBlur stdDeviation="1.5" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <!-- 손톱 모양 -->
+    <path
+      id="almondNail"
+      d="
+        M 48 4
+        C 18 4, 4 28, 4 66
+        L 4 151
+        C 4 188, 21 214, 48 224
+        C 75 214, 92 188, 92 151
+        L 92 66
+        C 92 28, 78 4, 48 4
+        Z
+      "
+    />
+    <!-- 손톱 클립 -->
+    <clipPath id="nailClip">
+      <use href="#almondNail"/>
+    </clipPath>
+    <!-- 글리터 심볼 -->
+    <g id="glitterCluster">
+      <circle cx="0" cy="0" r="3.2" fill="#FFFFFF"/>
+      <circle cx="12" cy="-5" r="2.2" fill="#F8E8FF"/>
+      <circle cx="-10" cy="8" r="2.6" fill="#D8B9FF"/>
+      <circle cx="7" cy="13" r="1.8" fill="#FFFFFF"/>
+      <path
+        d="M 18 4 L 21 10 L 27 13 L 21 16 L 18 22 L 15 16 L 9 13 L 15 10 Z"
+        fill="#FFFFFF"
+      />
+    </g>
+  </defs>
+  <!-- =====================================================
+       LEFT HAND
+  ====================================================== -->
+  <!-- 1 -->
+  <g transform="translate(30 16)" filter="url(#nailShadow)">
+    <use href="#almondNail" fill="url(#purpleGradientDeep)"/>
+    <use href="#almondNail" fill="url(#magneticGlow)" opacity=".9"/>
+    <g clip-path="url(#nailClip)">
+      <ellipse
+        cx="34"
+        cy="56"
+        rx="21"
+        ry="58"
+        fill="url(#glassHighlight)"
+        transform="rotate(-13 34 56)"
+      />
+      <g transform="translate(48 154)" filter="url(#glitterGlow)">
+        <use href="#glitterCluster"/>
+      </g>
+      <g transform="translate(28 184) scale(.72)">
+        <use href="#glitterCluster"/>
+      </g>
+    </g>
+    <use
+      href="#almondNail"
+      fill="none"
+      stroke="#FFFFFF"
+      stroke-opacity=".38"
+      stroke-width="2"
+    />
+  </g>
+  <!-- 2 -->
+  <g transform="translate(142 16)" filter="url(#nailShadow)">
+    <use href="#almondNail" fill="url(#purpleGradient)"/>
+    <use href="#almondNail" fill="url(#magneticGlow)" opacity=".85"/>
+    <g clip-path="url(#nailClip)">
+      <ellipse
+        cx="38"
+        cy="50"
+        rx="18"
+        ry="62"
+        fill="url(#glassHighlight)"
+        transform="rotate(-10 38 50)"
+      />
+      <g transform="translate(35 162) scale(.86)">
+        <use href="#glitterCluster"/>
+      </g>
+      <g transform="translate(66 188) scale(.58)">
+        <use href="#glitterCluster"/>
+      </g>
+    </g>
+    <use
+      href="#almondNail"
+      fill="none"
+      stroke="#FFFFFF"
+      stroke-opacity=".35"
+      stroke-width="2"
+    />
+  </g>
+  <!-- 3 -->
+  <g transform="translate(254 16)" filter="url(#nailShadow)">
+    <use href="#almondNail" fill="url(#purpleGradientLight)"/>
+    <use href="#almondNail" fill="url(#magneticGlow)" opacity=".82"/>
+    <g clip-path="url(#nailClip)">
+      <ellipse
+        cx="32"
+        cy="56"
+        rx="19"
+        ry="64"
+        fill="url(#glassHighlight)"
+        transform="rotate(-9 32 56)"
+      />
+      <g transform="translate(55 147) scale(.92)">
+        <use href="#glitterCluster"/>
+      </g>
+      <g transform="translate(28 195) scale(.58)">
+        <use href="#glitterCluster"/>
+      </g>
+    </g>
+    <use
+      href="#almondNail"
+      fill="none"
+      stroke="#FFFFFF"
+      stroke-opacity=".36"
+      stroke-width="2"
+    />
+  </g>
+  <!-- 4 -->
+  <g transform="translate(366 16)" filter="url(#nailShadow)">
+    <use href="#almondNail" fill="url(#purpleGradientDeep)"/>
+    <use href="#almondNail" fill="url(#magneticGlow)" opacity=".88"/>
+    <g clip-path="url(#nailClip)">
+      <ellipse
+        cx="41"
+        cy="48"
+        rx="20"
+        ry="60"
+        fill="url(#glassHighlight)"
+        transform="rotate(-7 41 48)"
+      />
+      <g transform="translate(42 162)">
+        <use href="#glitterCluster"/>
+      </g>
+      <g transform="translate(67 192) scale(.55)">
+        <use href="#glitterCluster"/>
+      </g>
+    </g>
+    <use
+      href="#almondNail"
+      fill="none"
+      stroke="#FFFFFF"
+      stroke-opacity=".35"
+      stroke-width="2"
+    />
+  </g>
+  <!-- 5 -->
+  <g transform="translate(478 16)" filter="url(#nailShadow)">
+    <use href="#almondNail" fill="url(#purpleGradient)"/>
+    <use href="#almondNail" fill="url(#magneticGlow)" opacity=".82"/>
+    <g clip-path="url(#nailClip)">
+      <ellipse
+        cx="35"
+        cy="52"
+        rx="18"
+        ry="61"
+        fill="url(#glassHighlight)"
+        transform="rotate(-12 35 52)"
+      />
+      <g transform="translate(58 158) scale(.82)">
+        <use href="#glitterCluster"/>
+      </g>
+      <g transform="translate(27 190) scale(.62)">
+        <use href="#glitterCluster"/>
+      </g>
+    </g>
+    <use
+      href="#almondNail"
+      fill="none"
+      stroke="#FFFFFF"
+      stroke-opacity=".38"
+      stroke-width="2"
+    />
+  </g>
+  <!-- 중앙 구분선 -->
+  <line
+    x1="620"
+    y1="70"
+    x2="620"
+    y2="196"
+    stroke="#D9D9DF"
+    stroke-width="1"
+  />
+  <!-- =====================================================
+       RIGHT HAND
+  ====================================================== -->
+  <!-- 6 -->
+  <g transform="translate(670 16)" filter="url(#nailShadow)">
+    <use href="#almondNail" fill="url(#purpleGradientLight)"/>
+    <use href="#almondNail" fill="url(#magneticGlow)" opacity=".84"/>
+    <g clip-path="url(#nailClip)">
+      <ellipse
+        cx="37"
+        cy="50"
+        rx="19"
+        ry="61"
+        fill="url(#glassHighlight)"
+        transform="rotate(-9 37 50)"
+      />
+      <g transform="translate(38 160) scale(.88)">
+        <use href="#glitterCluster"/>
+      </g>
+      <g transform="translate(66 190) scale(.58)">
+        <use href="#glitterCluster"/>
+      </g>
+    </g>
+    <use
+      href="#almondNail"
+      fill="none"
+      stroke="#FFFFFF"
+      stroke-opacity=".36"
+      stroke-width="2"
+    />
+  </g>
+  <!-- 7 -->
+  <g transform="translate(782 16)" filter="url(#nailShadow)">
+    <use href="#almondNail" fill="url(#purpleGradientDeep)"/>
+    <use href="#almondNail" fill="url(#magneticGlow)" opacity=".88"/>
+    <g clip-path="url(#nailClip)">
+      <ellipse
+        cx="34"
+        cy="54"
+        rx="20"
+        ry="62"
+        fill="url(#glassHighlight)"
+        transform="rotate(-11 34 54)"
+      />
+      <g transform="translate(58 152)">
+        <use href="#glitterCluster"/>
+      </g>
+      <g transform="translate(30 193) scale(.55)">
+        <use href="#glitterCluster"/>
+      </g>
+    </g>
+    <use
+      href="#almondNail"
+      fill="none"
+      stroke="#FFFFFF"
+      stroke-opacity=".36"
+      stroke-width="2"
+    />
+  </g>
+  <!-- 8 -->
+  <g transform="translate(894 16)" filter="url(#nailShadow)">
+    <use href="#almondNail" fill="url(#purpleGradient)"/>
+    <use href="#almondNail" fill="url(#magneticGlow)" opacity=".83"/>
+    <g clip-path="url(#nailClip)">
+      <ellipse
+        cx="39"
+        cy="50"
+        rx="18"
+        ry="59"
+        fill="url(#glassHighlight)"
+        transform="rotate(-8 39 50)"
+      />
+      <g transform="translate(42 157) scale(.9)">
+        <use href="#glitterCluster"/>
+      </g>
+      <g transform="translate(67 190) scale(.58)">
+        <use href="#glitterCluster"/>
+      </g>
+    </g>
+    <use
+      href="#almondNail"
+      fill="none"
+      stroke="#FFFFFF"
+      stroke-opacity=".37"
+      stroke-width="2"
+    />
+  </g>
+  <!-- 9 -->
+  <g transform="translate(1006 16)" filter="url(#nailShadow)">
+    <use href="#almondNail" fill="url(#purpleGradientLight)"/>
+    <use href="#almondNail" fill="url(#magneticGlow)" opacity=".85"/>
+    <g clip-path="url(#nailClip)">
+      <ellipse
+        cx="33"
+        cy="55"
+        rx="19"
+        ry="60"
+        fill="url(#glassHighlight)"
+        transform="rotate(-12 33 55)"
+      />
+      <g transform="translate(56 159) scale(.82)">
+        <use href="#glitterCluster"/>
+      </g>
+      <g transform="translate(28 192) scale(.6)">
+        <use href="#glitterCluster"/>
+      </g>
+    </g>
+    <use
+      href="#almondNail"
+      fill="none"
+      stroke="#FFFFFF"
+      stroke-opacity=".38"
+      stroke-width="2"
+    />
+  </g>
+  <!-- 10 -->
+  <g transform="translate(1118 16)" filter="url(#nailShadow)">
+    <use href="#almondNail" fill="url(#purpleGradientDeep)"/>
+    <use href="#almondNail" fill="url(#magneticGlow)" opacity=".9"/>
+    <g clip-path="url(#nailClip)">
+      <ellipse
+        cx="38"
+        cy="52"
+        rx="20"
+        ry="62"
+        fill="url(#glassHighlight)"
+        transform="rotate(-8 38 52)"
+      />
+      <g transform="translate(43 156)">
+        <use href="#glitterCluster"/>
+      </g>
+      <g transform="translate(68 190) scale(.54)">
+        <use href="#glitterCluster"/>
+      </g>
+    </g>
+    <use
+      href="#almondNail"
+      fill="none"
+      stroke="#FFFFFF"
+      stroke-opacity=".36"
+      stroke-width="2"
+    />
+  </g>
+</svg>

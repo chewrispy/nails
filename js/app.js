@@ -172,6 +172,16 @@ function getEntryGraphic(entry) {
 }
 
 
+function getEntryThumbnail(entry) {
+    return (
+        normalizePath(
+            entry.thumbnail || ""
+        ) ||
+        getEntryGraphic(entry)
+    );
+}
+
+
 function getEntryPhotos(entry) {
     return Array.isArray(entry.photos)
         ? entry.photos
@@ -410,7 +420,9 @@ function renderCollection() {
                 getEntryTitle(entry);
 
             const graphicPath =
-                getEntryGraphic(entry);
+                state.currentView === "grid"
+                    ? getEntryThumbnail(entry)
+                    : getEntryGraphic(entry);
 
             graphic.src =
                 graphicPath ||

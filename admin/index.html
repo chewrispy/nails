@@ -93,7 +93,10 @@
                     PERSONAL NAIL ARCHIVE
                 </p>
 
-                <h1 class="adminHeader__title">
+                <h1
+                    id="adminHeaderTitle"
+                    class="adminHeader__title"
+                >
                     NEW
                     <span>RECORD.</span>
                 </h1>
@@ -113,84 +116,37 @@
 
 
         <!-- ==================================================
-             PROGRESS
+             EXISTING RECORDS
         =================================================== -->
 
-        <nav
-            class="progress"
-            aria-label="네일 기록 등록 단계"
-        >
+        <section class="entryList">
 
-            <ol class="progress__list">
+            <div class="entryList__heading">
 
-                <li
-                    class="progress__item is-active"
-                    data-step-indicator="1"
+                <h2 class="entryList__title">
+                    RECORDS
+                </h2>
+
+                <button
+                    id="newRecordButton"
+                    class="button button--secondary"
+                    type="button"
                 >
-                    <span class="progress__number">
-                        01
-                    </span>
+                    ＋ NEW RECORD
+                </button>
 
-                    <span class="progress__label">
-                        RECORD
-                    </span>
-                </li>
+            </div>
 
-                <li
-                    class="progress__item"
-                    data-step-indicator="2"
-                >
-                    <span class="progress__number">
-                        02
-                    </span>
+            <div
+                id="entryListItems"
+                class="entryList__items"
+            >
+                <p class="entryList__empty">
+                    불러오는 중...
+                </p>
+            </div>
 
-                    <span class="progress__label">
-                        GRAPHIC
-                    </span>
-                </li>
-
-                <li
-                    class="progress__item"
-                    data-step-indicator="3"
-                >
-                    <span class="progress__number">
-                        03
-                    </span>
-
-                    <span class="progress__label">
-                        DETAILS
-                    </span>
-                </li>
-
-                <li
-                    class="progress__item"
-                    data-step-indicator="4"
-                >
-                    <span class="progress__number">
-                        04
-                    </span>
-
-                    <span class="progress__label">
-                        PREVIEW
-                    </span>
-                </li>
-
-                <li
-                    class="progress__item"
-                    data-step-indicator="5"
-                >
-                    <span class="progress__number">
-                        05
-                    </span>
-
-                    <span class="progress__label">
-                        PUBLISH
-                    </span>
-                </li>
-
-            </ol>
-
-        </nav>
+        </section>
 
 
         <!-- ==================================================
@@ -223,7 +179,7 @@
 
 
         <!-- ==================================================
-             FORM
+             FORM (한 페이지, 스크롤로 전체 작성)
         =================================================== -->
 
         <form
@@ -233,18 +189,15 @@
         >
 
             <!-- ==================================================
-                 STEP 01 — RECORD
+                 RECORD
             =================================================== -->
 
-            <section
-                class="formStep is-active"
-                data-step="1"
-            >
+            <section class="formStep">
 
                 <header class="stepHeader">
 
                     <p class="stepHeader__number">
-                        STEP 01
+                        01 · RECORD
                     </p>
 
                     <h2 class="stepHeader__title">
@@ -277,6 +230,14 @@
                             type="date"
                             required
                         >
+
+                        <p
+                            id="dateHelp"
+                            class="field__help"
+                            hidden
+                        >
+                            기존 기록을 수정 중에는 날짜를 바꿀 수 없습니다.
+                        </p>
 
                         <p class="field__error"></p>
 
@@ -370,7 +331,7 @@
                             </label>
 
                             <p class="field__help">
-                                실제 손 사진을 1~8장 올려주세요.
+                                실제 손 사진을 1~8장 올려주세요. 수정 중에는 그대로 두면 기존 사진이 유지됩니다.
                             </p>
 
                         </div>
@@ -416,7 +377,7 @@
                             </p>
 
                             <p class="dropzone__description">
-                                JPG · PNG · WEBP · HEIC / 최대 8장
+                                JPG · PNG · WEBP · HEIC / 추가로 최대 8장까지
                             </p>
 
                         </div>
@@ -503,39 +464,19 @@
 
                 </div>
 
-
-                <div class="stepActions">
-
-                    <button
-                        id="goToGraphic"
-                        class="button button--primary"
-                        type="button"
-                    >
-                        CONTINUE
-                        <span aria-hidden="true">
-                            →
-                        </span>
-                    </button>
-
-                </div>
-
             </section>
 
 
             <!-- ==================================================
-                 STEP 02 — GRAPHIC
+                 GRAPHIC
             =================================================== -->
 
-            <section
-                class="formStep"
-                data-step="2"
-                hidden
-            >
+            <section class="formStep">
 
                 <header class="stepHeader">
 
                     <p class="stepHeader__number">
-                        STEP 02
+                        02 · GRAPHIC
                     </p>
 
                     <h2 class="stepHeader__title">
@@ -650,7 +591,10 @@
 
                     <div class="graphicPreview__heading">
 
-                        <h3 class="graphicPreview__label">
+                        <h3
+                            id="graphicPreviewLabel"
+                            class="graphicPreview__label"
+                        >
                             GRAPHIC PREVIEW
                         </h3>
 
@@ -676,47 +620,19 @@
 
                 </section>
 
-
-                <div class="stepActions stepActions--split">
-
-                    <button
-                        id="backToRecord"
-                        class="button button--secondary"
-                        type="button"
-                    >
-                        ← BACK
-                    </button>
-
-                    <button
-                        id="goToDetails"
-                        class="button button--primary"
-                        type="button"
-                    >
-                        CONTINUE
-                        <span aria-hidden="true">
-                            →
-                        </span>
-                    </button>
-
-                </div>
-
             </section>
 
 
             <!-- ==================================================
-                 STEP 03 — DETAILS
+                 DETAILS
             =================================================== -->
 
-            <section
-                class="formStep"
-                data-step="3"
-                hidden
-            >
+            <section class="formStep">
 
                 <header class="stepHeader">
 
                     <p class="stepHeader__number">
-                        STEP 03
+                        03 · DETAILS
                     </p>
 
                     <h2 class="stepHeader__title">
@@ -825,47 +741,19 @@
 
                 </div>
 
-
-                <div class="stepActions stepActions--split">
-
-                    <button
-                        id="backToGraphic"
-                        class="button button--secondary"
-                        type="button"
-                    >
-                        ← BACK
-                    </button>
-
-                    <button
-                        id="goToPreview"
-                        class="button button--primary"
-                        type="button"
-                    >
-                        PREVIEW
-                        <span aria-hidden="true">
-                            →
-                        </span>
-                    </button>
-
-                </div>
-
             </section>
 
 
             <!-- ==================================================
-                 STEP 04 — PREVIEW
+                 PREVIEW
             =================================================== -->
 
-            <section
-                class="formStep"
-                data-step="4"
-                hidden
-            >
+            <section class="formStep">
 
                 <header class="stepHeader">
 
                     <p class="stepHeader__number">
-                        STEP 04
+                        04 · PREVIEW
                     </p>
 
                     <h2 class="stepHeader__title">
@@ -887,9 +775,13 @@
                             ARCHIVE PREVIEW
                         </h3>
 
-                        <span class="previewFrameSection__caption">
-                            실제 상세페이지 미리보기
-                        </span>
+                        <button
+                            id="refreshPreview"
+                            class="textButton"
+                            type="button"
+                        >
+                            REFRESH ↻
+                        </button>
 
                     </div>
 
@@ -902,54 +794,32 @@
 
                 </section>
 
-
-                <div class="stepActions stepActions--split">
-
-                    <button
-                        id="backToDetails"
-                        class="button button--secondary"
-                        type="button"
-                    >
-                        ← BACK
-                    </button>
-
-                    <button
-                        id="goToPublish"
-                        class="button button--primary"
-                        type="button"
-                    >
-                        CONTINUE TO PUBLISH
-                        <span aria-hidden="true">
-                            →
-                        </span>
-                    </button>
-
-                </div>
-
             </section>
 
 
             <!-- ==================================================
-                 STEP 05 — PUBLISH
+                 PUBLISH
             =================================================== -->
 
-            <section
-                class="formStep"
-                data-step="5"
-                hidden
-            >
+            <section class="formStep">
 
                 <header class="stepHeader">
 
                     <p class="stepHeader__number">
-                        STEP 05
+                        05 · PUBLISH
                     </p>
 
-                    <h2 class="stepHeader__title">
+                    <h2
+                        id="publishHeading"
+                        class="stepHeader__title"
+                    >
                         아카이브에 게시합니다.
                     </h2>
 
-                    <p class="stepHeader__description">
+                    <p
+                        id="publishDescription"
+                        class="stepHeader__description"
+                    >
                         이미지와 기록을 GitHub에 하나의 커밋으로 저장합니다.
                     </p>
 
@@ -1053,15 +923,7 @@
                 </section>
 
 
-                <div class="stepActions stepActions--split">
-
-                    <button
-                        id="backToPreview"
-                        class="button button--secondary"
-                        type="button"
-                    >
-                        ← BACK
-                    </button>
+                <div class="stepActions">
 
                     <button
                         id="publishArchive"
@@ -1100,7 +962,10 @@
                 PUBLISHED
             </p>
 
-            <h2 class="publishSuccess__title">
+            <h2
+                id="publishSuccessTitle"
+                class="publishSuccess__title"
+            >
                 새로운 네일 기록이<br>
                 아카이브에 추가되었습니다.
             </h2>
@@ -1128,7 +993,7 @@
                     class="button button--secondary"
                     type="button"
                 >
-                    CREATE ANOTHER
+                    BACK TO ADMIN
                 </button>
 
             </div>

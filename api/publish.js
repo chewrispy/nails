@@ -187,11 +187,6 @@ function validateRequest(body) {
         Array.isArray(body.photos)
             ? body.photos
             : [];
-    if (!photosInput.length) {
-        throw new Error(
-            "원본 손 사진이 필요합니다."
-        );
-    }
     if (
         photosInput.length >
         MAX_PHOTOS

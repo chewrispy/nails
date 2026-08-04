@@ -74,9 +74,34 @@ function isDataURL(value) {
 function validateImageFile(file, label) {
     if (
         !file ||
-        typeof file !== "object" ||
-        !isDataURL(file.data)
+        typeof file !== "object"
     ) {
+        throw new Error(
+            `${label} 이미지 데이터가 올바르지 않습니다.`
+        );
+    }
+    /*
+     * 수정(edit) 모드: 이미지를 다시 안 올리고 기존 파일을
+     * 그대로 유지하는 경우. 새로 업로드하지 않고 기존
+     * 저장소 경로를 그대로 재사용한다.
+     */
+    if (file.existingPath) {
+        const existingPath =
+            String(
+                file.existingPath
+            ).trim();
+        if (
+            !/^assets\/nails\/[^/]+\/[a-zA-Z0-9._-]+$/.test(
+                existingPath
+            )
+        ) {
+            throw new Error(
+                `${label} 기존 이미지 경로가 올바르지 않습니다.`
+            );
+        }
+        return { existingPath };
+    }
+    if (!isDataURL(file.data)) {
         throw new Error(
             `${label} 이미지 데이터가 올바르지 않습니다.`
         );
@@ -606,37 +631,53 @@ async function prepareBlobs(data) {
     const folder =
         `assets/nails/${sanitizeFileSegment(data.date)}`;
     const treeEntries = [];
+
     const graphicPath =
-        `${folder}/nail-graphic.${extensionFromFile(data.graphic)}`;
-    await uploadImageBlob(
-        graphicPath,
-        data.graphic,
-        treeEntries
-    );
+        data.graphic.existingPath
+            ? data.graphic.existingPath
+            : await uploadImageBlob(
+                  `${folder}/nail-graphic.${extensionFromFile(data.graphic)}`,
+                  data.graphic,
+                  treeEntries
+              );
+
     let inspirationPath = "";
     if (data.inspiration) {
         inspirationPath =
-            `${folder}/inspiration.${extensionFromFile(data.inspiration)}`;
-        await uploadImageBlob(
-            inspirationPath,
-            data.inspiration,
-            treeEntries
-        );
+            data.inspiration.existingPath
+                ? data.inspiration.existingPath
+                : await uploadImageBlob(
+                      `${folder}/inspiration.${extensionFromFile(data.inspiration)}`,
+                      data.inspiration,
+                      treeEntries
+                  );
     }
+
     const photoPaths = [];
     for (
         let index = 0;
         index < data.photos.length;
         index += 1
     ) {
-        const number =
-            String(index + 1)
-                .padStart(2, "0");
+        const file =
+            data.photos[index];
+        if (file.existingPath) {
+            photoPaths.push(
+                file.existingPath
+            );
+            continue;
+        }
+        /*
+         * 새로 올리는 사진은 타임스탬프 기반 파일명을 써서
+         * 유지 중인(existingPath) 사진들과 절대 겹치지 않게 한다.
+         */
+        const unique =
+            `${Date.now()}-${index}`;
         const path =
-            `${folder}/original-${number}.${extensionFromFile(data.photos[index])}`;
+            `${folder}/original-${unique}.${extensionFromFile(file)}`;
         await uploadImageBlob(
             path,
-            data.photos[index],
+            file,
             treeEntries
         );
         photoPaths.push(path);

@@ -115,13 +115,11 @@ button{
 
     display:flex;
 
-    justify-content:space-between;
+    justify-content:flex-end;
 
-    align-items:flex-end;
+    align-items:center;
 
-    gap:40px;
-
-    margin-bottom:56px;
+    margin-bottom:28px;
 
 }
 
@@ -168,6 +166,63 @@ button{
     font-size:12px;
 
     font-weight:700;
+
+}
+
+
+/* ==========================================================
+   TOAST
+========================================================== */
+
+.toast{
+
+    position:fixed;
+
+    top:24px;
+    left:50%;
+
+    z-index:200;
+
+    transform:translateX(-50%);
+
+    padding:14px 26px;
+
+    border-radius:999px;
+
+    background:var(--accent);
+
+    color:white;
+
+    font-size:13px;
+    font-weight:700;
+
+    box-shadow:var(--shadow);
+
+    animation:toastIn .3s ease;
+
+}
+
+.toast[hidden]{
+
+    display:none;
+
+}
+
+@keyframes toastIn{
+
+    from{
+
+        opacity:0;
+        transform:translateX(-50%) translateY(-10px);
+
+    }
+
+    to{
+
+        opacity:1;
+        transform:translateX(-50%) translateY(0);
+
+    }
 
 }
 

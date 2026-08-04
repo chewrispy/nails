@@ -16,6 +16,7 @@ const state = {
     originalPhotos: [],      // [{kind:"new", file} | {kind:"existing", path}]
     inspiration: null,       // {kind:"new", file} | {kind:"existing", path} | null
     graphic: null,           // {kind:"new", file} | {kind:"existing", path} | null
+    thumbnail: null,         // {kind:"new", file} | {kind:"existing", path} | null
 
     colors: ["#F7D4E2"],
 
@@ -58,7 +59,6 @@ const form = $("#archiveForm");
 
 /* Header / Entry List */
 
-const adminHeaderTitle = $("#adminHeaderTitle");
 const newRecordButton = $("#newRecordButton");
 const entryListItems = $("#entryListItems");
 
@@ -78,6 +78,7 @@ const archiveFinish = $("#archiveFinish");
 const originalInput = $("#originalPhotos");
 const inspirationInput = $("#inspirationImage");
 const graphicInput = $("#nailGraphic");
+const thumbnailInput = $("#nailThumbnail");
 
 
 /* Preview (upload) */
@@ -87,6 +88,7 @@ const inspirationPreview = $("#inspirationPreview");
 const graphicPreviewSection = $("#graphicPreviewSection");
 const graphicPreviewLabel = $("#graphicPreviewLabel");
 const graphicPreviewImage = $("#graphicPreviewImage");
+const thumbnailPreview = $("#thumbnailPreview");
 
 
 /* Archive preview (iframe) */
@@ -98,7 +100,6 @@ const refreshPreviewButton = $("#refreshPreview");
 
 const publishHeading = $("#publishHeading");
 const publishDescription = $("#publishDescription");
-const publishCheck = $("#confirmPublish");
 const publishButton = $("#publishArchive");
 
 
@@ -122,11 +123,11 @@ const colorList = $("#colorList");
 const addColorButton = $("#addColor");
 
 
-/* Success */
+/* Toast */
 
-const entryListSection = $(".entryList");
-const publishSuccessSection = $("#publishSuccess");
-const publishSuccessTitle = $("#publishSuccessTitle");
+const toast = $("#toast");
+const toastText = $("#toastText");
+let toastTimer = null;
 
 
 /* ==========================================================
@@ -457,6 +458,27 @@ function renderGraphic() {
 
 
 /* ==========================================================
+   GRID THUMBNAIL
+========================================================== */
+
+function renderThumbnail() {
+    thumbnailPreview.innerHTML = "";
+
+    if (!state.thumbnail) {
+        return;
+    }
+
+    thumbnailPreview.appendChild(
+        createPreviewCard(state.thumbnail, () => {
+            state.thumbnail = null;
+            revokeInput(thumbnailInput);
+            renderThumbnail();
+        })
+    );
+}
+
+
+/* ==========================================================
    FILE INPUT
 ========================================================== */
 
@@ -479,6 +501,12 @@ graphicInput.addEventListener("change", (e) => {
     state.graphic = file ? { kind: "new", file } : null;
     renderGraphic();
     fillPublishSummary();
+});
+
+thumbnailInput.addEventListener("change", (e) => {
+    const file = e.target.files[0];
+    state.thumbnail = file ? { kind: "new", file } : null;
+    renderThumbnail();
 });
 
 
@@ -531,6 +559,11 @@ bindDropzone($("#graphicDropzone"), graphicInput, (files) => {
     state.graphic = files[0] ? { kind: "new", file: files[0] } : null;
     renderGraphic();
     fillPublishSummary();
+});
+
+bindDropzone($("#thumbnailDropzone"), thumbnailInput, (files) => {
+    state.thumbnail = files[0] ? { kind: "new", file: files[0] } : null;
+    renderThumbnail();
 });
 
 
@@ -653,15 +686,6 @@ function validateForm() {
 
 
 /* ==========================================================
-   PUBLISH ENABLE
-========================================================== */
-
-publishCheck.addEventListener("change", () => {
-    publishButton.disabled = !publishCheck.checked || state.publishing;
-});
-
-
-/* ==========================================================
    ARCHIVE PREVIEW (iframe)
 ========================================================== */
 
@@ -734,6 +758,7 @@ function fillPublishSummary() {
 async function createJSONPayload() {
     const graphic = await serializeSlot(state.graphic, 1800, 0.85);
     const inspiration = await serializeSlot(state.inspiration, 1600, 0.82);
+    const thumbnail = await serializeSlot(state.thumbnail, 1000, 0.85);
 
     const photos = await Promise.all(
         state.originalPhotos.map((slot) => serializeSlot(slot, 1600, 0.82))
@@ -751,6 +776,7 @@ async function createJSONPayload() {
         colors: [...state.colors],
         graphic,
         inspiration,
+        thumbnail,
         photos
     };
 }
@@ -827,9 +853,26 @@ form.addEventListener("submit", async (event) => {
         }
     } finally {
         state.publishing = false;
-        publishButton.disabled = !publishCheck.checked;
+        publishButton.disabled = false;
+        publishProgress.hidden = true;
     }
 });
+
+
+/* ==========================================================
+   TOAST
+========================================================== */
+
+function showToast(message) {
+    toastText.textContent = message;
+    toast.hidden = false;
+
+    clearTimeout(toastTimer);
+
+    toastTimer = setTimeout(() => {
+        toast.hidden = true;
+    }, 3200);
+}
 
 
 /* ==========================================================
@@ -837,24 +880,16 @@ form.addEventListener("submit", async (event) => {
 ========================================================== */
 
 function showPublishSuccess(result) {
-    form.hidden = true;
-    entryListSection.hidden = true;
-    statusMessage.hidden = true;
-
-    publishSuccessTitle.innerHTML =
+    showToast(
         state.mode === "edit"
-            ? "네일 기록이<br>수정되었습니다."
-            : "새로운 네일 기록이<br>아카이브에 추가되었습니다.";
+            ? "수정사항이 반영되었습니다!"
+            : "새 기록이 등록되었습니다!"
+    );
 
-    publishSuccessSection.hidden = false;
-
-    $("#publishSuccessCommit").textContent = result.commit || "Published successfully.";
-}
-
-$("#createAnotherRecord").addEventListener("click", () => {
     sessionStorage.removeItem("naily-preview");
-    location.reload();
-});
+    resetToNewRecord();
+    loadEntries();
+}
 
 
 /* ==========================================================
@@ -922,9 +957,7 @@ function renderEntryList() {
 function updateModeUI() {
     const editing = state.mode === "edit";
 
-    adminHeaderTitle.innerHTML = editing
-        ? `EDIT<span>RECORD.</span>`
-        : `NEW<span>RECORD.</span>`;
+    newRecordButton.hidden = !editing;
 
     publishHeading.textContent = editing
         ? "수정 내용을 저장합니다."
@@ -968,20 +1001,22 @@ function loadEntryForEdit(entry) {
         ? { kind: "existing", path: stripLeadingPath(entry.inspiration) }
         : null;
 
+    state.thumbnail = entry.thumbnail
+        ? { kind: "existing", path: stripLeadingPath(entry.thumbnail) }
+        : null;
+
     state.originalPhotos = Array.isArray(entry.photos)
         ? entry.photos.map((path) => ({ kind: "existing", path: stripLeadingPath(path) }))
         : [];
 
     renderGraphic();
     renderInspiration();
+    renderThumbnail();
     renderOriginalPhotos();
     fillPublishSummary();
     updateModeUI();
     renderEntryList();
     hideStatus();
-
-    publishCheck.checked = false;
-    publishButton.disabled = true;
 
     window.scrollTo({ top: 0, behavior: "smooth" });
 }
@@ -1006,18 +1041,17 @@ function resetToNewRecord() {
 
     state.graphic = null;
     state.inspiration = null;
+    state.thumbnail = null;
     state.originalPhotos = [];
 
     renderGraphic();
     renderInspiration();
+    renderThumbnail();
     renderOriginalPhotos();
     fillPublishSummary();
     updateModeUI();
     renderEntryList();
     hideStatus();
-
-    publishCheck.checked = false;
-    publishButton.disabled = true;
 
     window.scrollTo({ top: 0, behavior: "smooth" });
 }

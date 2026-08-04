@@ -87,22 +87,6 @@
 
         <header class="adminHeader">
 
-            <div class="adminHeader__heading">
-
-                <p class="adminHeader__eyebrow">
-                    PERSONAL NAIL ARCHIVE
-                </p>
-
-                <h1
-                    id="adminHeaderTitle"
-                    class="adminHeader__title"
-                >
-                    NEW
-                    <span>RECORD.</span>
-                </h1>
-
-            </div>
-
             <a
                 class="adminHeader__archiveLink"
                 href="/"
@@ -113,6 +97,21 @@
             </a>
 
         </header>
+
+
+        <!-- ==================================================
+             TOAST
+        =================================================== -->
+
+        <div
+            id="toast"
+            class="toast"
+            role="status"
+            aria-live="polite"
+            hidden
+        >
+            <span id="toastText"></span>
+        </div>
 
 
         <!-- ==================================================
@@ -131,8 +130,9 @@
                     id="newRecordButton"
                     class="button button--secondary"
                     type="button"
+                    hidden
                 >
-                    ＋ NEW RECORD
+                    ✕ CANCEL EDIT
                 </button>
 
             </div>
@@ -620,6 +620,76 @@
 
                 </section>
 
+
+                <!-- GRID THUMBNAIL -->
+
+                <div class="field">
+
+                    <div class="field__heading">
+
+                        <div>
+
+                            <label
+                                class="field__label"
+                                for="nailThumbnail"
+                            >
+                                GRID THUMBNAIL
+                                <span class="field__optional">
+                                    OPTIONAL
+                                </span>
+                            </label>
+
+                            <p class="field__help">
+                                메인 페이지 그리드에 정사각형으로 표시할 썸네일입니다. 대표 손톱 하나만 컬러칩처럼 크롭한 이미지를 권장합니다.
+                                비워두면 네일 그래픽 이미지를 그대로 정사각형으로 크롭해서 사용합니다.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <div
+                        id="thumbnailDropzone"
+                        class="dropzone dropzone--compact"
+                        tabindex="0"
+                        role="button"
+                        aria-controls="nailThumbnail"
+                    >
+
+                        <input
+                            id="nailThumbnail"
+                            class="dropzone__input"
+                            name="nailThumbnail"
+                            type="file"
+                            accept="image/jpeg,image/png,image/webp"
+                        >
+
+                        <div class="dropzone__content">
+
+                            <span
+                                class="dropzone__icon"
+                                aria-hidden="true"
+                            >
+                                ＋
+                            </span>
+
+                            <p class="dropzone__title">
+                                썸네일 이미지를 추가하세요.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                    <div
+                        id="thumbnailPreview"
+                        class="uploadPreview uploadPreview--single"
+                    >
+                    </div>
+
+                </div>
+
             </section>
 
 
@@ -871,27 +941,6 @@
                 </section>
 
 
-                <label class="publishConfirm">
-
-                    <input
-                        id="confirmPublish"
-                        class="publishConfirm__input"
-                        type="checkbox"
-                    >
-
-                    <span
-                        class="publishConfirm__control"
-                        aria-hidden="true"
-                    >
-                    </span>
-
-                    <span class="publishConfirm__text">
-                        미리보기와 정보를 모두 확인했습니다.
-                    </span>
-
-                </label>
-
-
                 <section
                     id="publishProgress"
                     class="publishProgress"
@@ -929,7 +978,6 @@
                         id="publishArchive"
                         class="button button--primary"
                         type="submit"
-                        disabled
                     >
                         PUBLISH TO ARCHIVE
                     </button>
@@ -940,65 +988,6 @@
 
         </form>
 
-
-        <!-- ==================================================
-             SUCCESS
-        =================================================== -->
-
-        <section
-            id="publishSuccess"
-            class="publishSuccess"
-            hidden
-        >
-
-            <span
-                class="publishSuccess__icon"
-                aria-hidden="true"
-            >
-                ✓
-            </span>
-
-            <p class="publishSuccess__eyebrow">
-                PUBLISHED
-            </p>
-
-            <h2
-                id="publishSuccessTitle"
-                class="publishSuccess__title"
-            >
-                새로운 네일 기록이<br>
-                아카이브에 추가되었습니다.
-            </h2>
-
-            <p
-                id="publishSuccessCommit"
-                class="publishSuccess__commit"
-            >
-            </p>
-
-            <div class="publishSuccess__actions">
-
-                <a
-                    id="viewPublishedArchive"
-                    class="button button--primary"
-                    href="/"
-                    target="_blank"
-                    rel="noopener"
-                >
-                    VIEW ARCHIVE ↗
-                </a>
-
-                <button
-                    id="createAnotherRecord"
-                    class="button button--secondary"
-                    type="button"
-                >
-                    BACK TO ADMIN
-                </button>
-
-            </div>
-
-        </section>
 
     </main>
 

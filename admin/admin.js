@@ -648,11 +648,6 @@ function validateForm() {
         return false;
     }
 
-    if (state.originalPhotos.length === 0) {
-        showStatus("손 사진을 등록해주세요.", true);
-        return false;
-    }
-
     if (!state.graphic) {
         showStatus("네일 그래픽을 업로드해주세요.", true);
         return false;

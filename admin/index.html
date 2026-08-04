@@ -621,7 +621,7 @@
                 </section>
 
 
-                <!-- GRID THUMBNAIL -->
+                <!-- GRID THUMBNAIL (네일 그래픽에서 영역을 선택해서 만듭니다) -->
 
                 <div class="field">
 
@@ -629,18 +629,15 @@
 
                         <div>
 
-                            <label
-                                class="field__label"
-                                for="nailThumbnail"
-                            >
+                            <span class="field__label">
                                 GRID THUMBNAIL
                                 <span class="field__optional">
                                     OPTIONAL
                                 </span>
-                            </label>
+                            </span>
 
                             <p class="field__help">
-                                메인 페이지 그리드에 정사각형으로 표시할 썸네일입니다. 대표 손톱 하나만 컬러칩처럼 크롭한 이미지를 권장합니다.
+                                메인 페이지 그리드에 정사각형으로 표시할 썸네일입니다. 위 네일 그래픽에서 영역을 선택하면 별도 업로드 없이 만들 수 있어요.
                                 비워두면 네일 그래픽 이미지를 그대로 정사각형으로 크롭해서 사용합니다.
                             </p>
 
@@ -648,39 +645,13 @@
 
                     </div>
 
-
-                    <div
-                        id="thumbnailDropzone"
-                        class="dropzone dropzone--compact"
-                        tabindex="0"
-                        role="button"
-                        aria-controls="nailThumbnail"
+                    <button
+                        id="pickThumbnailArea"
+                        class="button button--secondary"
+                        type="button"
                     >
-
-                        <input
-                            id="nailThumbnail"
-                            class="dropzone__input"
-                            name="nailThumbnail"
-                            type="file"
-                            accept="image/jpeg,image/png,image/webp"
-                        >
-
-                        <div class="dropzone__content">
-
-                            <span
-                                class="dropzone__icon"
-                                aria-hidden="true"
-                            >
-                                ＋
-                            </span>
-
-                            <p class="dropzone__title">
-                                썸네일 이미지를 추가하세요.
-                            </p>
-
-                        </div>
-
-                    </div>
+                        네일 그래픽에서 영역 선택
+                    </button>
 
                     <div
                         id="thumbnailPreview"
@@ -815,131 +786,10 @@
 
 
             <!-- ==================================================
-                 PREVIEW
+                 PUBLISH (별도 단계 없이 바로 게시)
             =================================================== -->
 
-            <section class="formStep">
-
-                <header class="stepHeader">
-
-                    <p class="stepHeader__number">
-                        04 · PREVIEW
-                    </p>
-
-                    <h2 class="stepHeader__title">
-                        상세페이지를 확인하세요.
-                    </h2>
-
-                    <p class="stepHeader__description">
-                        게시 전 실제 아카이브에 표시될 모습을 확인합니다.
-                    </p>
-
-                </header>
-
-
-                <section class="previewFrameSection">
-
-                    <div class="previewFrameSection__heading">
-
-                        <h3 class="previewFrameSection__label">
-                            ARCHIVE PREVIEW
-                        </h3>
-
-                        <button
-                            id="refreshPreview"
-                            class="textButton"
-                            type="button"
-                        >
-                            REFRESH ↻
-                        </button>
-
-                    </div>
-
-                    <iframe
-                        id="archivePreviewFrame"
-                        class="previewFrameSection__frame"
-                        title="네일 아카이브 상세페이지 미리보기"
-                    >
-                    </iframe>
-
-                </section>
-
-            </section>
-
-
-            <!-- ==================================================
-                 PUBLISH
-            =================================================== -->
-
-            <section class="formStep">
-
-                <header class="stepHeader">
-
-                    <p class="stepHeader__number">
-                        05 · PUBLISH
-                    </p>
-
-                    <h2
-                        id="publishHeading"
-                        class="stepHeader__title"
-                    >
-                        아카이브에 게시합니다.
-                    </h2>
-
-                    <p
-                        id="publishDescription"
-                        class="stepHeader__description"
-                    >
-                        이미지와 기록을 GitHub에 하나의 커밋으로 저장합니다.
-                    </p>
-
-                </header>
-
-
-                <section class="publishSummary">
-
-                    <div class="publishSummary__visual">
-
-                        <img
-                            id="publishGraphic"
-                            class="publishSummary__image"
-                            alt="게시할 네일 그래픽"
-                        >
-
-                    </div>
-
-
-                    <dl class="publishSummary__details">
-
-                        <div>
-                            <dt>DATE</dt>
-                            <dd id="publishDate"></dd>
-                        </div>
-
-                        <div>
-                            <dt>TITLE</dt>
-                            <dd id="publishTitle"></dd>
-                        </div>
-
-                        <div>
-                            <dt>SHAPE</dt>
-                            <dd id="publishShape"></dd>
-                        </div>
-
-                        <div>
-                            <dt>FINISH</dt>
-                            <dd id="publishFinish"></dd>
-                        </div>
-
-                        <div>
-                            <dt>PHOTOS</dt>
-                            <dd id="publishPhotoCount"></dd>
-                        </div>
-
-                    </dl>
-
-                </section>
-
+            <div class="formFooter">
 
                 <section
                     id="publishProgress"
@@ -984,7 +834,7 @@
 
                 </div>
 
-            </section>
+            </div>
 
         </form>
 
@@ -1027,6 +877,88 @@
                     type="button"
                 >
                     REMOVE
+                </button>
+
+            </div>
+
+        </div>
+
+    </dialog>
+
+
+    <!-- ==================================================
+         THUMBNAIL CROP DIALOG
+    =================================================== -->
+
+    <dialog
+        id="thumbnailCropDialog"
+        class="cropDialog"
+    >
+
+        <div class="cropDialog__content">
+
+            <h2 class="confirmDialog__title">
+                썸네일 영역 선택
+            </h2>
+
+            <p class="confirmDialog__description">
+                정사각형 영역을 드래그해서 위치를 잡고, 크기를 조절하세요.
+            </p>
+
+            <div
+                id="cropStage"
+                class="cropStage"
+            >
+
+                <img
+                    id="cropImage"
+                    class="cropStage__image"
+                    alt="네일 그래픽"
+                >
+
+                <div
+                    id="cropBox"
+                    class="cropStage__box"
+                >
+                </div>
+
+            </div>
+
+            <div class="cropDialog__sizeField">
+
+                <label
+                    class="field__label"
+                    for="cropSize"
+                >
+                    SIZE
+                </label>
+
+                <input
+                    id="cropSize"
+                    type="range"
+                    min="15"
+                    max="100"
+                    value="55"
+                >
+
+            </div>
+
+            <div class="confirmDialog__actions">
+
+                <button
+                    id="cancelCrop"
+                    class="button button--secondary"
+                    type="button"
+                >
+                    CANCEL
+                </button>
+
+                <button
+                    id="confirmCrop"
+                    class="button button--primary"
+                    type="button"
+                >
+                    USE THIS AREA
                 </button>
 
             </div>

@@ -215,6 +215,13 @@ function validateRequest(body) {
                   "인스퍼레이션"
               )
             : null;
+    const thumbnail =
+        body.thumbnail
+            ? validateImageFile(
+                  body.thumbnail,
+                  "그리드 썸네일"
+              )
+            : null;
     return {
         date,
         title:
@@ -236,7 +243,8 @@ function validateRequest(body) {
             ),
         graphic,
         photos,
-        inspiration
+        inspiration,
+        thumbnail
     };
 }
 /* ==========================================================
@@ -653,6 +661,18 @@ async function prepareBlobs(data) {
                   );
     }
 
+    let thumbnailPath = "";
+    if (data.thumbnail) {
+        thumbnailPath =
+            data.thumbnail.existingPath
+                ? data.thumbnail.existingPath
+                : await uploadImageBlob(
+                      `${folder}/thumbnail.${extensionFromFile(data.thumbnail)}`,
+                      data.thumbnail,
+                      treeEntries
+                  );
+    }
+
     const photoPaths = [];
     for (
         let index = 0;
@@ -686,6 +706,7 @@ async function prepareBlobs(data) {
         folder,
         graphicPath,
         inspirationPath,
+        thumbnailPath,
         photoPaths,
         treeEntries
     };
@@ -811,6 +832,10 @@ export default async function handler(
             inspiration:
                 prepared.inspirationPath
                     ? `./${prepared.inspirationPath}`
+                    : "",
+            thumbnail:
+                prepared.thumbnailPath
+                    ? `./${prepared.thumbnailPath}`
                     : "",
             photos:
                 prepared.photoPaths.map(

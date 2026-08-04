@@ -1595,6 +1595,139 @@ button{
 
 
 /* ==========================================================
+   THUMBNAIL PICKER
+========================================================== */
+
+#pickThumbnailArea{
+
+    margin-top:6px;
+
+}
+
+
+/* ==========================================================
+   FORM FOOTER (프리뷰/퍼블리시 단계 없이 바로 게시)
+========================================================== */
+
+.formFooter{
+
+    margin-top:54px;
+
+}
+
+.formFooter .stepActions{
+
+    margin-top:0;
+
+}
+
+
+/* ==========================================================
+   THUMBNAIL CROP DIALOG
+========================================================== */
+
+.cropDialog{
+
+    width:min(560px,calc(100% - 32px));
+
+    padding:0;
+
+    border:none;
+
+    border-radius:28px;
+
+}
+
+.cropDialog::backdrop{
+
+    background:rgba(0,0,0,.35);
+
+}
+
+.cropDialog__content{
+
+    padding:36px;
+
+}
+
+.cropStage{
+
+    position:relative;
+
+    overflow:hidden;
+
+    width:100%;
+
+    margin-top:24px;
+
+    border-radius:20px;
+
+    background:#111;
+
+    touch-action:none;
+
+}
+
+.cropStage__image{
+
+    display:block;
+
+    width:100%;
+
+    height:auto;
+
+    user-select:none;
+
+    -webkit-user-drag:none;
+
+}
+
+.cropStage__box{
+
+    position:absolute;
+
+    top:0;
+    left:0;
+
+    box-shadow:
+        0 0 0 2000px rgba(0,0,0,.55);
+
+    border:2px solid white;
+
+    border-radius:8px;
+
+    cursor:grab;
+
+    touch-action:none;
+
+}
+
+.cropStage__box:active{
+
+    cursor:grabbing;
+
+}
+
+.cropDialog__sizeField{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:16px;
+
+    margin-top:22px;
+
+}
+
+.cropDialog__sizeField input[type="range"]{
+
+    flex:1;
+
+}
+
+
+/* ==========================================================
    DRAG ACTIVE
 ========================================================== */
 

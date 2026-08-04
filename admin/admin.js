@@ -22,8 +22,6 @@ const state = {
 
     entries: [],
 
-    previewData: null,
-
     publishing: false
 
 };
@@ -78,7 +76,6 @@ const archiveFinish = $("#archiveFinish");
 const originalInput = $("#originalPhotos");
 const inspirationInput = $("#inspirationImage");
 const graphicInput = $("#nailGraphic");
-const thumbnailInput = $("#nailThumbnail");
 
 
 /* Preview (upload) */
@@ -91,15 +88,20 @@ const graphicPreviewImage = $("#graphicPreviewImage");
 const thumbnailPreview = $("#thumbnailPreview");
 
 
-/* Archive preview (iframe) */
+/* Thumbnail crop */
 
-const refreshPreviewButton = $("#refreshPreview");
+const pickThumbnailAreaButton = $("#pickThumbnailArea");
+const thumbnailCropDialog = $("#thumbnailCropDialog");
+const cropStage = $("#cropStage");
+const cropImage = $("#cropImage");
+const cropBox = $("#cropBox");
+const cropSizeInput = $("#cropSize");
+const cancelCropButton = $("#cancelCrop");
+const confirmCropButton = $("#confirmCrop");
 
 
 /* Publish */
 
-const publishHeading = $("#publishHeading");
-const publishDescription = $("#publishDescription");
 const publishButton = $("#publishArchive");
 
 
@@ -308,6 +310,10 @@ async function compressImageFile(file, maxDimension = 1600, quality = 0.82) {
  * 수정(edit) 모드에서 기존 이미지를 다시 안 올리면 이 슬롯은
  * {kind:"existing", path} 형태로 남아있다 — 서버로는 새로 업로드하지
  * 않고 기존 경로를 그대로 재사용하라는 뜻으로 전송한다.
+ *
+ * 썸네일은 "data" 슬롯일 수도 있다 — 네일 그래픽에서 직접 크롭해
+ * 캔버스로 이미 인코딩까지 끝낸 dataURL이므로, 다시 압축하지 않고
+ * 그대로 전송한다.
  */
 async function serializeSlot(slot, maxDimension, quality) {
     if (!slot) {
@@ -316,6 +322,10 @@ async function serializeSlot(slot, maxDimension, quality) {
 
     if (slot.kind === "existing") {
         return { existingPath: slot.path };
+    }
+
+    if (slot.kind === "data") {
+        return { name: slot.name, type: slot.type, size: slot.size || 0, data: slot.data };
     }
 
     return compressImageFile(slot.file, maxDimension, quality);
@@ -367,6 +377,8 @@ function createPreviewCard(slot, onRemove) {
     if (slot.kind === "existing") {
         card.appendChild(createImage(`/${slot.path}`, "기존 이미지"));
         card.appendChild(createBadge("SAVED"));
+    } else if (slot.kind === "data") {
+        card.appendChild(createImage(slot.data, "선택한 썸네일 영역"));
     } else {
         const reader = new FileReader();
 
@@ -395,7 +407,6 @@ function renderOriginalPhotos() {
             createPreviewCard(slot, () => {
                 state.originalPhotos.splice(index, 1);
                 renderOriginalPhotos();
-                fillPublishSummary();
             })
         );
     });
@@ -471,7 +482,6 @@ function renderThumbnail() {
     thumbnailPreview.appendChild(
         createPreviewCard(state.thumbnail, () => {
             state.thumbnail = null;
-            revokeInput(thumbnailInput);
             renderThumbnail();
         })
     );
@@ -486,7 +496,6 @@ originalInput.addEventListener("change", (e) => {
     const files = [...e.target.files].map((file) => ({ kind: "new", file }));
     state.originalPhotos = [...state.originalPhotos, ...files].slice(0, 8);
     renderOriginalPhotos();
-    fillPublishSummary();
     revokeInput(originalInput);
 });
 
@@ -500,13 +509,6 @@ graphicInput.addEventListener("change", (e) => {
     const file = e.target.files[0];
     state.graphic = file ? { kind: "new", file } : null;
     renderGraphic();
-    fillPublishSummary();
-});
-
-thumbnailInput.addEventListener("change", (e) => {
-    const file = e.target.files[0];
-    state.thumbnail = file ? { kind: "new", file } : null;
-    renderThumbnail();
 });
 
 
@@ -518,7 +520,6 @@ $("#removeGraphic").addEventListener("click", () => {
     state.graphic = null;
     revokeInput(graphicInput);
     renderGraphic();
-    fillPublishSummary();
 });
 
 
@@ -547,7 +548,6 @@ bindDropzone($("#originalDropzone"), originalInput, (files) => {
     const newSlots = files.map((file) => ({ kind: "new", file }));
     state.originalPhotos = [...state.originalPhotos, ...newSlots].slice(0, 8);
     renderOriginalPhotos();
-    fillPublishSummary();
 });
 
 bindDropzone($("#inspirationDropzone"), inspirationInput, (files) => {
@@ -558,12 +558,6 @@ bindDropzone($("#inspirationDropzone"), inspirationInput, (files) => {
 bindDropzone($("#graphicDropzone"), graphicInput, (files) => {
     state.graphic = files[0] ? { kind: "new", file: files[0] } : null;
     renderGraphic();
-    fillPublishSummary();
-});
-
-bindDropzone($("#thumbnailDropzone"), thumbnailInput, (files) => {
-    state.thumbnail = files[0] ? { kind: "new", file: files[0] } : null;
-    renderThumbnail();
 });
 
 
@@ -686,68 +680,139 @@ function validateForm() {
 
 
 /* ==========================================================
-   ARCHIVE PREVIEW (iframe)
+   THUMBNAIL CROP
+   업로드된 네일 그래픽 이미지에서 정사각형 영역을 직접 골라
+   썸네일을 만든다 — 별도 파일을 다시 올릴 필요가 없다.
 ========================================================== */
 
-function buildPreview() {
-    state.previewData = {
-        date: archiveDate.value,
-        title: archiveTitle.value.trim() || "Untitled Nail",
-        memo: archiveMemo.value.trim(),
-        shape: archiveShape.value.trim(),
-        finish: archiveFinish.value
-            .split(",")
-            .map((v) => v.trim())
-            .filter(Boolean),
-        colors: [...state.colors]
-    };
+let cropDrag = null;
 
-    sessionStorage.setItem("naily-preview", JSON.stringify(state.previewData));
-
-    const frame = $("#archivePreviewFrame");
-
-    if (frame) {
-        frame.src = "../preview.html?t=" + Date.now();
-    }
+function clamp(value, min, max) {
+    return Math.min(max, Math.max(min, value));
 }
 
-refreshPreviewButton.addEventListener("click", () => {
-    buildPreview();
+function getCropBoxSizePx() {
+    const stageSize = Math.min(cropStage.clientWidth, cropStage.clientHeight);
+    const percent = Number(cropSizeInput.value) / 100;
+    return clamp(stageSize * percent, 40, stageSize);
+}
+
+function positionCropBox(left, top, size) {
+    const maxLeft = Math.max(0, cropStage.clientWidth - size);
+    const maxTop = Math.max(0, cropStage.clientHeight - size);
+
+    cropBox.style.width = `${size}px`;
+    cropBox.style.height = `${size}px`;
+    cropBox.style.left = `${clamp(left, 0, maxLeft)}px`;
+    cropBox.style.top = `${clamp(top, 0, maxTop)}px`;
+}
+
+function centerCropBox() {
+    const size = getCropBoxSizePx();
+    positionCropBox(
+        (cropStage.clientWidth - size) / 2,
+        (cropStage.clientHeight - size) / 2,
+        size
+    );
+}
+
+cropSizeInput.addEventListener("input", () => {
+    const size = getCropBoxSizePx();
+    const prevLeft = parseFloat(cropBox.style.left) || 0;
+    const prevTop = parseFloat(cropBox.style.top) || 0;
+    const prevSize = parseFloat(cropBox.style.width) || size;
+    const centerX = prevLeft + prevSize / 2;
+    const centerY = prevTop + prevSize / 2;
+
+    positionCropBox(centerX - size / 2, centerY - size / 2, size);
 });
 
+cropBox.addEventListener("pointerdown", (e) => {
+    e.preventDefault();
 
-/* ==========================================================
-   PUBLISH SUMMARY (필드가 바뀔 때마다 실시간으로 갱신)
-========================================================== */
-
-function fillPublishSummary() {
-    $("#publishDate").textContent = archiveDate.value;
-    $("#publishTitle").textContent = archiveTitle.value.trim() || "Untitled Nail";
-    $("#publishShape").textContent = archiveShape.value;
-    $("#publishFinish").textContent = archiveFinish.value;
-    $("#publishPhotoCount").textContent = `${state.originalPhotos.length} Photos`;
-
-    if (!state.graphic) {
-        $("#publishGraphic").removeAttribute("src");
-        return;
-    }
-
-    if (state.graphic.kind === "existing") {
-        $("#publishGraphic").src = `/${state.graphic.path}`;
-        return;
-    }
-
-    const reader = new FileReader();
-
-    reader.onload = (e) => {
-        $("#publishGraphic").src = e.target.result;
+    cropDrag = {
+        startX: e.clientX,
+        startY: e.clientY,
+        boxLeft: parseFloat(cropBox.style.left) || 0,
+        boxTop: parseFloat(cropBox.style.top) || 0
     };
 
-    reader.readAsDataURL(state.graphic.file);
+    cropBox.setPointerCapture(e.pointerId);
+});
+
+cropBox.addEventListener("pointermove", (e) => {
+    if (!cropDrag) {
+        return;
+    }
+
+    const size = parseFloat(cropBox.style.width) || getCropBoxSizePx();
+
+    positionCropBox(
+        cropDrag.boxLeft + (e.clientX - cropDrag.startX),
+        cropDrag.boxTop + (e.clientY - cropDrag.startY),
+        size
+    );
+});
+
+function endCropDrag(e) {
+    cropDrag = null;
+
+    if (e && cropBox.hasPointerCapture && cropBox.hasPointerCapture(e.pointerId)) {
+        cropBox.releasePointerCapture(e.pointerId);
+    }
 }
 
-[archiveDate, archiveTitle, archiveShape, archiveFinish].forEach((field) => {
-    field.addEventListener("input", fillPublishSummary);
+cropBox.addEventListener("pointerup", endCropDrag);
+cropBox.addEventListener("pointercancel", endCropDrag);
+
+pickThumbnailAreaButton.addEventListener("click", () => {
+    if (!state.graphic || !graphicPreviewImage.src) {
+        showStatus("먼저 네일 그래픽을 업로드해주세요.", true);
+        return;
+    }
+
+    const openCropTool = () => {
+        thumbnailCropDialog.showModal();
+        centerCropBox();
+    };
+
+    cropImage.src = graphicPreviewImage.src;
+
+    if (cropImage.complete && cropImage.naturalWidth) {
+        openCropTool();
+    } else {
+        cropImage.onload = openCropTool;
+    }
+});
+
+cancelCropButton.addEventListener("click", () => {
+    thumbnailCropDialog.close();
+});
+
+confirmCropButton.addEventListener("click", () => {
+    const scale = cropImage.naturalWidth / cropStage.clientWidth;
+    const size = (parseFloat(cropBox.style.width) || getCropBoxSizePx()) * scale;
+    const sx = (parseFloat(cropBox.style.left) || 0) * scale;
+    const sy = (parseFloat(cropBox.style.top) || 0) * scale;
+
+    const OUTPUT_SIZE = 900;
+    const canvas = document.createElement("canvas");
+    canvas.width = OUTPUT_SIZE;
+    canvas.height = OUTPUT_SIZE;
+
+    const context = canvas.getContext("2d");
+    context.drawImage(cropImage, sx, sy, size, size, 0, 0, OUTPUT_SIZE, OUTPUT_SIZE);
+
+    state.thumbnail = {
+        kind: "data",
+        name: "thumbnail.jpg",
+        type: "image/jpeg",
+        size: 0,
+        data: canvas.toDataURL("image/jpeg", 0.85)
+    };
+
+    renderThumbnail();
+    thumbnailCropDialog.close();
 });
 
 
@@ -886,7 +951,6 @@ function showPublishSuccess(result) {
             : "새 기록이 등록되었습니다!"
     );
 
-    sessionStorage.removeItem("naily-preview");
     resetToNewRecord();
     loadEntries();
 }
@@ -959,14 +1023,6 @@ function updateModeUI() {
 
     newRecordButton.hidden = !editing;
 
-    publishHeading.textContent = editing
-        ? "수정 내용을 저장합니다."
-        : "아카이브에 게시합니다.";
-
-    publishDescription.textContent = editing
-        ? "변경된 내용만 GitHub에 하나의 커밋으로 반영합니다."
-        : "이미지와 기록을 GitHub에 하나의 커밋으로 저장합니다.";
-
     publishButton.textContent = editing ? "SAVE CHANGES" : "PUBLISH TO ARCHIVE";
 }
 
@@ -1013,7 +1069,6 @@ function loadEntryForEdit(entry) {
     renderInspiration();
     renderThumbnail();
     renderOriginalPhotos();
-    fillPublishSummary();
     updateModeUI();
     renderEntryList();
     hideStatus();
@@ -1048,7 +1103,6 @@ function resetToNewRecord() {
     renderInspiration();
     renderThumbnail();
     renderOriginalPhotos();
-    fillPublishSummary();
     updateModeUI();
     renderEntryList();
     hideStatus();
@@ -1066,7 +1120,6 @@ newRecordButton.addEventListener("click", resetToNewRecord);
 renderColors();
 hideStatus();
 updateModeUI();
-fillPublishSummary();
 loadEntries();
 
 if (getPassword()) {

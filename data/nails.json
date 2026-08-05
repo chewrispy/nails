@@ -141,16 +141,19 @@
     "number": 23,
     "date": "2026-02-14",
     "title": "보라색 펄 + 불규칙 테두리",
-    "shape": "",
+    "shape": "아몬드",
     "finish": [
       "펄",
-      "테두리 아트"
+      "테두리프렌치"
     ],
-    "colors": [],
+    "colors": [
+      "#F7D4E2"
+    ],
     "memo": "네일 하러 가는 길에 컬러를 두고 고민하다가 결국 양손 다 색깔을 통일. 보라색 펄에 보라색 불규칙한 테두리로 완성. 다음엔 풀코트로 자석네일 해보고 싶다는 이야기도 나옴.",
     "inspiration": "",
+    "thumbnail": "./assets/nails/2026-02-14/thumbnail.jpg",
     "photos": [],
-    "graphic": ""
+    "graphic": "./assets/nails/2026-02-14/nail-graphic.jpg"
   },
   {
     "number": 22,

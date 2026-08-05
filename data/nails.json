@@ -83,15 +83,19 @@
     "number": 26,
     "date": "2026-04-17",
     "title": "젬스톤네일",
-    "shape": "",
+    "shape": "아몬드",
     "finish": [
+      "시럽",
       "스톤"
     ],
-    "colors": [],
+    "colors": [
+      "#F7D4E2"
+    ],
     "memo": "오빠가 카톡으로 꽃 디자인을 보내줬는데 꽃을 그리다가 계속 실패해서 15-20분간 씨름하다가 다른 디자인으로 선회. 마침 얼마전에 봤던 젬스톤네일이 생각나서 그걸로 결정.",
     "inspiration": "",
+    "thumbnail": "./assets/nails/2026-04-17/thumbnail.jpg",
     "photos": [],
-    "graphic": ""
+    "graphic": "./assets/nails/2026-04-17/nail-graphic.jpg"
   },
   {
     "number": 25,

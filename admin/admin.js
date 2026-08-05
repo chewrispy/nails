@@ -57,8 +57,17 @@ const form = $("#archiveForm");
 
 /* Header / Entry List */
 
-const newRecordButton = $("#newRecordButton");
 const entryListItems = $("#entryListItems");
+
+
+/* Delete Record */
+
+const deleteRecordButton = $("#deleteRecordButton");
+const deleteRecordDialog = $("#deleteRecordDialog");
+const deleteRecordDescription = $("#deleteRecordDescription");
+const cancelDeleteRecordButton = $("#cancelDeleteRecord");
+const confirmDeleteRecordButton = $("#confirmDeleteRecord");
+let deleting = false;
 
 
 /* Inputs */
@@ -130,6 +139,16 @@ const addColorButton = $("#addColor");
 const toast = $("#toast");
 const toastText = $("#toastText");
 let toastTimer = null;
+
+/*
+ * popover API를 지원하지 않는 아주 오래된 브라우저에서는
+ * [popover] 속성이 그냥 무시되어 초기 상태부터 토스트가
+ * 화면에 보여버릴 수 있다 — 그런 환경에서만 hidden으로
+ * 초기화해서 안전하게 fallback한다.
+ */
+if (typeof toast.showPopover !== "function") {
+    toast.hidden = true;
+}
 
 
 /* ==========================================================
@@ -923,14 +942,38 @@ form.addEventListener("submit", async (event) => {
    TOAST
 ========================================================== */
 
+/*
+ * popover="manual"로 토스트를 브라우저의 top layer에 띄운다 —
+ * 스크롤 위치, 조상 요소의 transform/overflow, 다른 스태킹
+ * 컨텍스트와 무관하게 항상 화면에 보인다. showPopover()를
+ * 지원하지 않는 구형 브라우저에서는 기존 hidden 토글 방식으로
+ * 자연스럽게 대체된다.
+ */
 function showToast(message) {
     toastText.textContent = message;
-    toast.hidden = false;
+
+    if (typeof toast.showPopover === "function") {
+        try {
+            toast.showPopover();
+        } catch {
+            toast.hidden = false;
+        }
+    } else {
+        toast.hidden = false;
+    }
 
     clearTimeout(toastTimer);
 
     toastTimer = setTimeout(() => {
-        toast.hidden = true;
+        if (typeof toast.hidePopover === "function") {
+            try {
+                toast.hidePopover();
+            } catch {
+                toast.hidden = true;
+            }
+        } else {
+            toast.hidden = true;
+        }
     }, 3200);
 }
 
@@ -1016,7 +1059,7 @@ function renderEntryList() {
 function updateModeUI() {
     const editing = state.mode === "edit";
 
-    newRecordButton.hidden = !editing;
+    deleteRecordButton.hidden = !editing;
 
     publishButton.textContent = editing ? "SAVE CHANGES" : "PUBLISH TO ARCHIVE";
 }
@@ -1105,7 +1148,70 @@ function resetToNewRecord() {
     window.scrollTo({ top: 0, behavior: "smooth" });
 }
 
-newRecordButton.addEventListener("click", resetToNewRecord);
+
+/* ==========================================================
+   DELETE RECORD
+========================================================== */
+
+deleteRecordButton.addEventListener("click", () => {
+    if (state.mode !== "edit" || !state.editingDate) {
+        return;
+    }
+
+    const label = archiveTitle.value.trim() || "Untitled Nail";
+
+    deleteRecordDescription.textContent =
+        `"${label}" (${state.editingDate}) 기록을 삭제하면 아카이브에서 즉시 사라지며 되돌릴 수 없습니다. (이미지 파일 자체는 저장소에 남아있습니다.)`;
+
+    deleteRecordDialog.showModal();
+});
+
+cancelDeleteRecordButton.addEventListener("click", () => {
+    deleteRecordDialog.close();
+});
+
+confirmDeleteRecordButton.addEventListener("click", async () => {
+    if (deleting || state.mode !== "edit" || !state.editingDate) {
+        return;
+    }
+
+    deleting = true;
+    confirmDeleteRecordButton.disabled = true;
+
+    try {
+        const response = await fetch("/api/delete", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "x-admin-password": getPassword()
+            },
+            body: JSON.stringify({ date: state.editingDate })
+        });
+
+        const result = await response.json();
+
+        if (!response.ok) {
+            throw new Error(result.error || "삭제에 실패했습니다.");
+        }
+
+        deleteRecordDialog.close();
+        showToast("기록이 삭제되었습니다.");
+        resetToNewRecord();
+        loadEntries();
+    } catch (error) {
+        deleteRecordDialog.close();
+
+        if (error.message.includes("관리자")) {
+            clearPassword();
+            showLogin("비밀번호가 올바르지 않습니다.");
+        } else {
+            showStatus(error.message, true);
+        }
+    } finally {
+        deleting = false;
+        confirmDeleteRecordButton.disabled = false;
+    }
+});
 
 
 /* ==========================================================

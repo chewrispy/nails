@@ -176,10 +176,22 @@ button{
 
 .toast{
 
+    /*
+     * popover="manual"로 브라우저의 top layer에 렌더링된다 —
+     * 페이지 스크롤/트랜스폼/스태킹 컨텍스트와 무관하게
+     * 항상 화면 맨 위에 뜬다. 아래 값들은 popover UA 기본
+     * 스타일(inset:0; margin:auto; border; background 등)을
+     * 명시적으로 덮어쓴다.
+     */
     position:fixed;
 
     top:24px;
     left:50%;
+    right:auto;
+    bottom:auto;
+
+    margin:0;
+    border:none;
 
     z-index:200;
 
@@ -269,6 +281,16 @@ button{
     letter-spacing:.16em;
 
     color:var(--sub);
+
+}
+
+.entryList__editActions{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:10px;
 
 }
 
@@ -1004,7 +1026,8 @@ button{
 
     padding:0;
 
-    border:none;
+    border:1px solid var(--line);
+    border-radius:12px;
 
     background:none;
 

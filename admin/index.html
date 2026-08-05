@@ -108,7 +108,7 @@
             class="toast"
             role="status"
             aria-live="polite"
-            hidden
+            popover="manual"
         >
             <span id="toastText"></span>
         </div>
@@ -126,14 +126,18 @@
                     RECORDS
                 </h2>
 
-                <button
-                    id="newRecordButton"
-                    class="button button--secondary"
-                    type="button"
-                    hidden
-                >
-                    ✕ CANCEL EDIT
-                </button>
+                <div class="entryList__editActions">
+
+                    <button
+                        id="deleteRecordButton"
+                        class="button button--danger"
+                        type="button"
+                        hidden
+                    >
+                        🗑 DELETE
+                    </button>
+
+                </div>
 
             </div>
 
@@ -961,6 +965,53 @@
                     type="button"
                 >
                     USE THIS AREA
+                </button>
+
+            </div>
+
+        </div>
+
+    </dialog>
+
+
+    <!-- ==================================================
+         DELETE RECORD DIALOG
+    =================================================== -->
+
+    <dialog
+        id="deleteRecordDialog"
+        class="confirmDialog"
+    >
+
+        <div class="confirmDialog__content">
+
+            <h2 class="confirmDialog__title">
+                이 기록을 삭제할까요?
+            </h2>
+
+            <p
+                id="deleteRecordDescription"
+                class="confirmDialog__description"
+            >
+                기록을 삭제하면 아카이브에서 즉시 사라지며 되돌릴 수 없습니다. (이미지 파일 자체는 저장소에 남아있습니다.)
+            </p>
+
+            <div class="confirmDialog__actions">
+
+                <button
+                    id="cancelDeleteRecord"
+                    class="button button--secondary"
+                    type="button"
+                >
+                    CANCEL
+                </button>
+
+                <button
+                    id="confirmDeleteRecord"
+                    class="button button--danger"
+                    type="button"
+                >
+                    DELETE
                 </button>
 
             </div>

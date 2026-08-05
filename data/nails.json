@@ -343,16 +343,19 @@
     "number": 12,
     "date": "2025-06-08",
     "title": "시럽 풀컬러 (양손 다른 컬러)",
-    "shape": "",
+    "shape": "스퀘어",
     "finish": [
       "시럽",
       "풀컬러"
     ],
-    "colors": [],
+    "colors": [
+      "#F7D4E2"
+    ],
     "memo": "시럽으로 풀컬러. 남편이 골라준 컬러로 양손 다르게. 다른 디자인은 추가하지 않음.",
     "inspiration": "",
+    "thumbnail": "./assets/nails/2025-06-08/thumbnail-1785930579193.jpg",
     "photos": [],
-    "graphic": ""
+    "graphic": "./assets/nails/2025-06-08/nail-graphic-1785930578837.jpg"
   },
   {
     "number": 11,

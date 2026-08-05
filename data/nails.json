@@ -274,15 +274,18 @@
     "number": 16,
     "date": "2025-09-12",
     "title": "펄 컬러",
-    "shape": "",
+    "shape": "아몬드",
     "finish": [
       "펄"
     ],
-    "colors": [],
+    "colors": [
+      "#F7D4E2"
+    ],
     "memo": "펄 색깔 다르게",
     "inspiration": "",
+    "thumbnail": "./assets/nails/2025-09-12/thumbnail-1785926477381.jpg",
     "photos": [],
-    "graphic": ""
+    "graphic": "./assets/nails/2025-09-12/nail-graphic-1785926477003.jpg"
   },
   {
     "number": 15,

@@ -65,16 +65,19 @@
   {
     "number": 27,
     "date": "2026-05-16",
-    "title": "젤리네일 - 보라색",
-    "shape": "",
+    "title": "보라색 시럽네일",
+    "shape": "아몬드",
     "finish": [
-      "젤리"
+      "시럽"
     ],
-    "colors": [],
-    "memo": "컬러풀한 그라데이션 시안을 가져갔었는데 마지막에 신상 젤리네일로 변경, 샘플판을 보고 색깔은 보라색으로 결정.",
+    "colors": [
+      "#F7D4E2"
+    ],
+    "memo": "컬러풀한 그라데이션 시안을 가져갔었는데 마지막에 신상 시럽네일로 변경, 샘플판을 보고 색깔은 보라색으로 결정.",
     "inspiration": "",
+    "thumbnail": "",
     "photos": [],
-    "graphic": ""
+    "graphic": "./assets/nails/2026-05-16/nail-graphic.jpg"
   },
   {
     "number": 26,

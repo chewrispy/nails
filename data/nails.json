@@ -195,7 +195,7 @@
     "title": "크리스마스 네일",
     "shape": "아몬드",
     "finish": [
-      "그래픽아트"
+      "드로잉"
     ],
     "colors": [
       "#F7D4E2"
@@ -203,8 +203,13 @@
     "memo": "크리스마스 네일. 이미지 보여주고 그대로 해달라고 했다. 사진에서 엄지는 안보여서 눈내리는 느낌으로 해주심.",
     "inspiration": "",
     "thumbnail": "",
-    "photos": [],
-    "graphic": "./assets/nails/2025-12-06/nail-graphic-1785925016459.jpg"
+    "photos": [
+      "./assets/nails/2025-12-06/original-1785925278165-0.jpg",
+      "./assets/nails/2025-12-06/original-1785925278547-1.jpg",
+      "./assets/nails/2025-12-06/original-1785925278909-2.jpg",
+      "./assets/nails/2025-12-06/original-1785925279316-3.jpg"
+    ],
+    "graphic": "./assets/nails/2025-12-06/nail-graphic-1785925277759.jpg"
   },
   {
     "number": 19,

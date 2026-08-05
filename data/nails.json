@@ -441,15 +441,20 @@
   {
     "number": 1,
     "date": "2024-11-09",
-    "title": "첫 네일 - 핑크 그라데이션",
-    "shape": "",
+    "title": "웨딩촬영용",
+    "shape": "스퀘어",
     "finish": [
       "그라데이션"
     ],
-    "colors": [],
+    "colors": [
+      "#F7D4E2"
+    ],
     "memo": "에이바이봄 첫 네일. 웨딩촬영을 위해 심플한 핑크 그라데이션.",
     "inspiration": "",
-    "photos": [],
-    "graphic": ""
+    "thumbnail": "",
+    "photos": [
+      "./assets/nails/2024-11-09/original-1785905276157-0.jpg"
+    ],
+    "graphic": "./assets/nails/2024-11-09/nail-graphic.jpg"
   }
 ]

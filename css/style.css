@@ -516,9 +516,9 @@ body.is-locked {
 .archiveCard__title {
     font-size:
         clamp(
-            30px,
-            4vw,
-            58px
+            22px,
+            2.4vw,
+            36px
         );
 }
 

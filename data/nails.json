@@ -208,15 +208,19 @@
     "number": 19,
     "date": "2025-11-15",
     "title": "삼성 이직 기념 네일",
-    "shape": "",
+    "shape": "아몬드",
     "finish": [
-      "그래픽(로고)"
+      "스티커",
+      "드로잉"
     ],
-    "colors": [],
+    "colors": [
+      "#254CC2"
+    ],
     "memo": "삼성 이직한다고 삼성네일. 컬러도 파랑, 별도 세개씩, 한자로 삼성",
     "inspiration": "",
+    "thumbnail": "./assets/nails/2025-11-15/thumbnail-1785908580297.jpg",
     "photos": [],
-    "graphic": ""
+    "graphic": "./assets/nails/2025-11-15/nail-graphic-1785908579997.jpg"
   },
   {
     "number": 18,

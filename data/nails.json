@@ -159,15 +159,18 @@
     "number": 22,
     "date": "2026-01-24",
     "title": "라바램프 네일",
-    "shape": "",
+    "shape": "아몬드",
     "finish": [
-      "그래픽 아트"
+      "그래픽아트"
     ],
-    "colors": [],
+    "colors": [
+      "#F7D4E2"
+    ],
     "memo": "라바램프 네일. 하이포텐셜 주인공이 하는 네일이라는데 한국에서는 대부분이 라바램프가 뭔지 모름. 다들 말미잘 몬스터인지 물어봄",
     "inspiration": "",
+    "thumbnail": "./assets/nails/2026-01-24/thumbnail.jpg",
     "photos": [],
-    "graphic": ""
+    "graphic": "./assets/nails/2026-01-24/nail-graphic.jpg"
   },
   {
     "number": 21,

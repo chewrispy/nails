@@ -232,15 +232,21 @@
     "number": 18,
     "date": "2025-11-01",
     "title": "버건디 + 프렌치 투톤",
-    "shape": "",
+    "shape": "아몬드",
     "finish": [
       "프렌치"
     ],
-    "colors": [],
+    "colors": [
+      "#230800",
+      "#431500"
+    ],
     "memo": "버건디에 갈색 프렌치, 약간 다른 버건디에 진한 남색 프렌치. 눈에 잘 띄지는 않음.",
     "inspiration": "",
-    "photos": [],
-    "graphic": ""
+    "thumbnail": "",
+    "photos": [
+      "./assets/nails/2025-11-01/original-1785925788154-0.jpg"
+    ],
+    "graphic": "./assets/nails/2025-11-01/nail-graphic-1785925787769.jpg"
   },
   {
     "number": 17,

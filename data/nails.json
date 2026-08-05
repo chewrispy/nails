@@ -469,16 +469,19 @@
     "number": 3,
     "date": "2024-12-21",
     "title": "연보라 그라데이션",
-    "shape": "",
+    "shape": "스퀘어",
     "finish": [
       "그라데이션",
       "글리터"
     ],
-    "colors": [],
+    "colors": [
+      "#F7D4E2"
+    ],
     "memo": "청순하게 연보라 그라데이션. 다음날 외갓댁에 어른들 인사드리러 가야해서 차분하게. 반짝이도 연하게 흐르듯이.",
     "inspiration": "",
+    "thumbnail": "./assets/nails/2024-12-21/thumbnail-1785927391447.jpg",
     "photos": [],
-    "graphic": ""
+    "graphic": "./assets/nails/2024-12-21/nail-graphic-1785927390976.jpg"
   },
   {
     "number": 2,

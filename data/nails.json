@@ -122,16 +122,20 @@
     "number": 24,
     "date": "2026-03-07",
     "title": "풀코트 자석네일",
-    "shape": "",
+    "shape": "아몬드",
     "finish": [
       "자석",
+      "실버",
       "풀코트"
     ],
-    "colors": [],
-    "memo": "풀코트 자석네일 ㅎㅎㅎ",
+    "colors": [
+      "#F7D4E2"
+    ],
+    "memo": "깔끔하게 풀코트 자석네일. 해보고 싶었던 건데 너무 깔끔하고 예뻤다.",
     "inspiration": "",
+    "thumbnail": "./assets/nails/2026-03-07/thumbnail.jpg",
     "photos": [],
-    "graphic": ""
+    "graphic": "./assets/nails/2026-03-07/nail-graphic.jpg"
   },
   {
     "number": 23,

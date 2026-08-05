@@ -410,16 +410,19 @@
     "number": 8,
     "date": "2025-03-08",
     "title": "봄 네일 - 파스텔 프렌치",
-    "shape": "",
+    "shape": "스퀘어",
     "finish": [
       "프렌치",
       "도트"
     ],
-    "colors": [],
+    "colors": [
+      "#F7D4E2"
+    ],
     "memo": "발랄한 봄 네일. 봄을 맞아 오른손에는 다양한 파스텔톤 컬러를 활용한 프렌치 연출. 왼손은 오른손과 매칭되는 높은 채도의 컬러로 프렌치를 먼저 그리고 하단에는 도트를 깔아서 경쾌한 무드로 연출.",
     "inspiration": "",
+    "thumbnail": "./assets/nails/2025-03-08/thumbnail-1785931620706.jpg",
     "photos": [],
-    "graphic": ""
+    "graphic": "./assets/nails/2025-03-08/nail-graphic-1785931620287.jpg"
   },
   {
     "number": 7,

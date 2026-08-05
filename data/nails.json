@@ -159,16 +159,19 @@
     "number": 21,
     "date": "2025-12-27",
     "title": "화이트 그라데이션 + 눈꽃",
-    "shape": "",
+    "shape": "아몬드",
     "finish": [
       "그라데이션",
-      "스톤"
+      "그래픽스티커"
     ],
-    "colors": [],
+    "colors": [
+      "#FFFFFF"
+    ],
     "memo": "화이트 그라데이션과 눈꽃 그래픽에 스톤 약간. 깔끔한 화이트그라데이션 해보고 싶었는데 너무 예쁘다.",
     "inspiration": "",
+    "thumbnail": "",
     "photos": [],
-    "graphic": ""
+    "graphic": "./assets/nails/2025-12-27/nail-graphic.jpg"
   },
   {
     "number": 20,

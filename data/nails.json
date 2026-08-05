@@ -291,15 +291,18 @@
     "number": 15,
     "date": "2025-08-09",
     "title": "버건디 풀컬러",
-    "shape": "",
+    "shape": "아몬드",
     "finish": [
       "풀컬러"
     ],
-    "colors": [],
+    "colors": [
+      "#F7D4E2"
+    ],
     "memo": "버건디 풀컬러",
     "inspiration": "",
+    "thumbnail": "./assets/nails/2025-08-09/thumbnail-1785926538415.jpg",
     "photos": [],
-    "graphic": ""
+    "graphic": "./assets/nails/2025-08-09/nail-graphic-1785926538122.jpg"
   },
   {
     "number": 14,

@@ -708,7 +708,7 @@ function clamp(value, min, max) {
 function getCropBoxSizePx() {
     const stageSize = Math.min(cropStage.clientWidth, cropStage.clientHeight);
     const percent = Number(cropSizeInput.value) / 100;
-    return clamp(stageSize * percent, 40, stageSize);
+    return clamp(stageSize * percent, 16, stageSize);
 }
 
 function positionCropBox(left, top, size) {

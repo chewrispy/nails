@@ -51,16 +51,19 @@
     "number": 28,
     "date": "2026-06-06",
     "title": "자석 그라데이션",
-    "shape": "",
+    "shape": "아몬드",
     "finish": [
       "자석",
       "그라데이션"
     ],
-    "colors": [],
+    "colors": [
+      "#99D1FF"
+    ],
     "memo": "원래 자석젤 샘플 중 은은한 푸른빛 도는 것으로 풀컬러 하려다, 인스타에서 본 컬러로 변경 결정. 물방울 효과는 빼고 자석 그라데이션만.",
     "inspiration": "",
+    "thumbnail": "./assets/nails/2026-06-06/thumbnail.jpg",
     "photos": [],
-    "graphic": ""
+    "graphic": "./assets/nails/2026-06-06/nail-graphic.jpg"
   },
   {
     "number": 27,

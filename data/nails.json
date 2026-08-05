@@ -282,13 +282,18 @@
     "number": 14,
     "date": "2025-07-19",
     "title": "수박?딸기?파프리카?홍고추?",
-    "shape": "",
-    "finish": [],
-    "colors": [],
+    "shape": "아몬드",
+    "finish": [
+      "프렌치"
+    ],
+    "colors": [
+      "#F7D4E2"
+    ],
     "memo": "수박?딸기?파프리카?홍고추?",
     "inspiration": "",
+    "thumbnail": "./assets/nails/2025-07-19/thumbnail-1785909428856.jpg",
     "photos": [],
-    "graphic": ""
+    "graphic": "./assets/nails/2025-07-19/nail-graphic-1785909428516.jpg"
   },
   {
     "number": 13,

@@ -240,15 +240,18 @@
     "number": 17,
     "date": "2025-10-04",
     "title": "자석네일 - 은색",
-    "shape": "",
+    "shape": "아몬드",
     "finish": [
       "자석"
     ],
-    "colors": [],
+    "colors": [
+      "#F7D4E2"
+    ],
     "memo": "자석네일. 이전부터 해보고 싶었던 자석네일. 심플하게 은색으로.",
     "inspiration": "",
+    "thumbnail": "./assets/nails/2025-10-04/thumbnail-1785909534540.jpg",
     "photos": [],
-    "graphic": ""
+    "graphic": "./assets/nails/2025-10-04/nail-graphic-1785909534174.jpg"
   },
   {
     "number": 16,

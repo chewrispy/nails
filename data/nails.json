@@ -412,15 +412,19 @@
     "number": 7,
     "date": "2025-02-14",
     "title": "웨딩네일 + 첫 패디큐어",
-    "shape": "",
+    "shape": "아몬드",
     "finish": [
-      "시럽"
+      "시럽",
+      "반콩"
     ],
-    "colors": [],
+    "colors": [
+      "#F7D4E2"
+    ],
     "memo": "웨딩네일. 드레스나 메이크업보다 튀지 않도록 최대한 깔끔하고 우아하게 연출. 핑크빛이 감도는 화이트 시럽에 은색반콩을 뿌리 부분에 올려 심심하지 않도록 연출. 생애 첫 패디큐어도 했음. 처음이니 너무 어색하게 느껴지지 않게 은은한 샴페인핑크 색상으로.",
     "inspiration": "",
+    "thumbnail": "./assets/nails/2025-02-14/thumbnail-1785926771056.jpg",
     "photos": [],
-    "graphic": ""
+    "graphic": "./assets/nails/2025-02-14/nail-graphic-1785926770695.jpg"
   },
   {
     "number": 6,

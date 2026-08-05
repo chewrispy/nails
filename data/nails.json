@@ -104,15 +104,19 @@
     "number": 25,
     "date": "2026-03-21",
     "title": "벚꽃네일",
-    "shape": "",
+    "shape": "아몬드",
     "finish": [
-      "그래픽 아트"
+      "그라데이션",
+      "스티커"
     ],
-    "colors": [],
+    "colors": [
+      "#F7D4E2"
+    ],
     "memo": "운전하다가 CU앱 디자인이 예뻐보여서 봄처럼 화사한 벚꽃네일로",
     "inspiration": "",
+    "thumbnail": "./assets/nails/2026-03-21/thumbnail.jpg",
     "photos": [],
-    "graphic": ""
+    "graphic": "./assets/nails/2026-03-21/nail-graphic.jpg"
   },
   {
     "number": 24,

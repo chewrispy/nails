@@ -326,15 +326,18 @@
     "number": 13,
     "date": "2025-06-28",
     "title": "회색과 핫핑크",
-    "shape": "",
+    "shape": "스퀘어",
     "finish": [
       "풀컬러"
     ],
-    "colors": [],
+    "colors": [
+      "#F7D4E2"
+    ],
     "memo": "회색과 핫핑크",
     "inspiration": "",
+    "thumbnail": "./assets/nails/2025-06-28/thumbnail-1785928941206.jpg",
     "photos": [],
-    "graphic": ""
+    "graphic": "./assets/nails/2025-06-28/nail-graphic-1785928940769.jpg"
   },
   {
     "number": 12,

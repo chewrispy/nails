@@ -635,11 +635,21 @@ async function prepareBlobs(data) {
         `assets/nails/${sanitizeFileSegment(data.date)}`;
     const treeEntries = [];
 
+    /*
+     * graphic/inspiration/thumbnail도 photos와 마찬가지로
+     * 새로 올릴 때는 타임스탬프를 파일명에 넣는다. 예전엔
+     * "nail-graphic.jpg"처럼 고정 파일명을 재사용해서, 수정
+     * 후 같은 URL로 새 이미지를 덮어써도 브라우저/Vercel
+     * 엣지 캐시가 예전 바이트를 계속 들고 있는 문제가 있었다
+     * (특히 항상 고정 확장자(jpg)로 저장되는 thumbnail에서
+     * 두드러졌음). URL 자체를 매번 새로 만들면 캐시와 무관하게
+     * 즉시 반영된다.
+     */
     const graphicPath =
         data.graphic.existingPath
             ? data.graphic.existingPath
             : await uploadImageBlob(
-                  `${folder}/nail-graphic.${extensionFromFile(data.graphic)}`,
+                  `${folder}/nail-graphic-${Date.now()}.${extensionFromFile(data.graphic)}`,
                   data.graphic,
                   treeEntries
               );
@@ -650,7 +660,7 @@ async function prepareBlobs(data) {
             data.inspiration.existingPath
                 ? data.inspiration.existingPath
                 : await uploadImageBlob(
-                      `${folder}/inspiration.${extensionFromFile(data.inspiration)}`,
+                      `${folder}/inspiration-${Date.now()}.${extensionFromFile(data.inspiration)}`,
                       data.inspiration,
                       treeEntries
                   );
@@ -662,7 +672,7 @@ async function prepareBlobs(data) {
             data.thumbnail.existingPath
                 ? data.thumbnail.existingPath
                 : await uploadImageBlob(
-                      `${folder}/thumbnail.${extensionFromFile(data.thumbnail)}`,
+                      `${folder}/thumbnail-${Date.now()}.${extensionFromFile(data.thumbnail)}`,
                       data.thumbnail,
                       treeEntries
                   );

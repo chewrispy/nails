@@ -57,12 +57,17 @@
       "그라데이션"
     ],
     "colors": [
-      "#99D1FF"
+      "#72ACFF"
     ],
     "memo": "원래 자석젤 샘플 중 은은한 푸른빛 도는 것으로 풀컬러 하려다, 인스타에서 본 컬러로 변경 결정. 물방울 효과는 빼고 자석 그라데이션만.",
     "inspiration": "",
     "thumbnail": "./assets/nails/2026-06-06/thumbnail.jpg",
-    "photos": [],
+    "photos": [
+      "./assets/nails/2026-06-06/original-1785926030034-0.jpg",
+      "./assets/nails/2026-06-06/original-1785926030504-1.jpg",
+      "./assets/nails/2026-06-06/original-1785926031000-2.jpg",
+      "./assets/nails/2026-06-06/original-1785926031403-3.jpg"
+    ],
     "graphic": "./assets/nails/2026-06-06/nail-graphic.jpg"
   },
   {

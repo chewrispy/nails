@@ -529,6 +529,27 @@
     "graphic": "./assets/nails/2024-11-09/nail-graphic.jpg"
   },
   {
+    "number": 43,
+    "date": "2023-12-04",
+    "title": "블랙 그라데이션",
+    "shape": "스퀘어",
+    "finish": [
+      "그라데이션"
+    ],
+    "colors": [
+      "#F7D4E2"
+    ],
+    "memo": "오호라 네일 스티커 붙임",
+    "inspiration": "",
+    "thumbnail": "./assets/nails/2023-12-04/thumbnail-1786003164617.jpg",
+    "photos": [
+      "./assets/nails/2023-12-04/original-1786003164963-0.jpg",
+      "./assets/nails/2023-12-04/original-1786003165471-1.jpg",
+      "./assets/nails/2023-12-04/original-1786003165938-2.jpg"
+    ],
+    "graphic": "./assets/nails/2023-12-04/nail-graphic-1786003163980.jpg"
+  },
+  {
     "number": 42,
     "date": "2023-07-16",
     "title": "인디고 패디",

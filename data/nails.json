@@ -529,6 +529,28 @@
     "graphic": "./assets/nails/2024-11-09/nail-graphic.jpg"
   },
   {
+    "number": 39,
+    "date": "2022-06-01",
+    "title": "오렌지 그라데이션",
+    "shape": "아몬드",
+    "finish": [
+      "그라데이션"
+    ],
+    "colors": [
+      "#F7D4E2"
+    ],
+    "memo": "지난번 (내 기준) 너무나도 화려한 네일을 한 이후에 좀 진정하자는 느낌으로 차분한 그라데이션을 시도. 이때도 나는 손이 길어보이는 디자인을 요청했던 것 같음. 손 길어보이는건 그라데이션이 최고라고 해서 선택. 왜 오렌지 컬러로 했는지는 기억이 잘 안나지만 아마 직전이 하늘색이었으니 반대되는 컬러로 했거나… 이 때 유행하는 컬러라고 해서 선택하지 않았을까. 이때가 아마 인생 최대 길이의 손톱을 가져본 시기인것 같다. 계속 엄지가 찢어졌었음.",
+    "inspiration": "",
+    "thumbnail": "./assets/nails/2022-06-01/thumbnail-1786001797585.jpg",
+    "photos": [
+      "./assets/nails/2022-06-01/original-1786001797945-0.jpg",
+      "./assets/nails/2022-06-01/original-1786001798563-1.jpg",
+      "./assets/nails/2022-06-01/original-1786001799037-2.jpg",
+      "./assets/nails/2022-06-01/original-1786001799428-3.jpg"
+    ],
+    "graphic": "./assets/nails/2022-06-01/nail-graphic-1786001796960.jpg"
+  },
+  {
     "number": 38,
     "date": "2022-05-14",
     "title": "구름 아트",

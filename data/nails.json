@@ -502,17 +502,18 @@
   {
     "number": 2,
     "date": "2024-11-30",
-    "title": "심플 + 레드 리본 포인트",
-    "shape": "스퀘우",
+    "title": "레드 리본",
+    "shape": "스퀘어",
     "finish": [
-      "리본 포인트"
+      "리본드로잉",
+      "반콩"
     ],
     "colors": [
       "#F7D4E2"
     ],
-    "memo": "아직 화려한 디자인은 어색해서 심플하고 무난하게. 너무 심심하니 빨간리본 포인트.",
+    "memo": "아직 화려한 디자인은 어색해서 심플하고 무난하게. 너무 심심하니 빨간 리본으로 포인트.",
     "inspiration": "",
-    "thumbnail": "./assets/nails/2024-11-30/thumbnail-1785928196748.jpg",
+    "thumbnail": "./assets/nails/2024-11-30/thumbnail-1785978521828.jpg",
     "photos": [],
     "graphic": "./assets/nails/2024-11-30/nail-graphic-1785928196351.jpg"
   },

@@ -304,7 +304,12 @@
     "memo": "자석네일. 이전부터 해보고 싶었던 자석네일. 심플하게 은색으로.",
     "inspiration": "",
     "thumbnail": "./assets/nails/2025-10-04/thumbnail-1785909534540.jpg",
-    "photos": [],
+    "photos": [
+      "./assets/nails/2025-10-04/original-1786012600653-0.jpg",
+      "./assets/nails/2025-10-04/original-1786012601194-1.jpg",
+      "./assets/nails/2025-10-04/original-1786012601678-2.jpg",
+      "./assets/nails/2025-10-04/original-1786012602073-3.jpg"
+    ],
     "graphic": "./assets/nails/2025-10-04/nail-graphic-1785909534174.jpg"
   },
   {

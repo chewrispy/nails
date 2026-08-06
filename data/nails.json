@@ -529,6 +529,29 @@
     "graphic": "./assets/nails/2024-11-09/nail-graphic.jpg"
   },
   {
+    "number": 34,
+    "date": "2019-03-31",
+    "title": "핑크 레이스",
+    "shape": "스퀘어",
+    "finish": [
+      "레이스",
+      "그라데이션"
+    ],
+    "colors": [
+      "#F7D4E2"
+    ],
+    "memo": "젤라또팩토리 3개 구매한 것 중에 다른 디자인. 아주 여성스럽다.",
+    "inspiration": "",
+    "thumbnail": "./assets/nails/2019-03-31/thumbnail-1785984813507.jpg",
+    "photos": [
+      "./assets/nails/2019-03-31/original-1785984813794-0.jpg",
+      "./assets/nails/2019-03-31/original-1785984814173-1.jpg",
+      "./assets/nails/2019-03-31/original-1785984814572-2.jpg",
+      "./assets/nails/2019-03-31/original-1785984814976-3.jpg"
+    ],
+    "graphic": "./assets/nails/2019-03-31/nail-graphic-1785984813049.jpg"
+  },
+  {
     "number": 33,
     "date": "2019-03-09",
     "title": "볼빨간하트",

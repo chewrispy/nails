@@ -529,6 +529,28 @@
     "graphic": "./assets/nails/2024-11-09/nail-graphic.jpg"
   },
   {
+    "number": 40,
+    "date": "2023-03-24",
+    "title": "치크",
+    "shape": "아몬드",
+    "finish": [
+      "치크"
+    ],
+    "colors": [
+      "#F7D4E2"
+    ],
+    "memo": "이때 엄청 유행하던게 치크네일이어서 시도해봄. 발그레 물든 것처럼 표현하는 방식이었는데, 하고 나서 귀여워서 만족도가 엄청 높았음. 선미가 했던 치크네일은 아마 다른 색으로 프렌치도 들어갔던 것 같은데 나는 그냥 심플한 치크네일로 완성.",
+    "inspiration": "./assets/nails/2023-03-24/inspiration-1786002338842.jpg",
+    "thumbnail": "./assets/nails/2023-03-24/thumbnail-1786002339298.jpg",
+    "photos": [
+      "./assets/nails/2023-03-24/original-1786002339587-0.jpg",
+      "./assets/nails/2023-03-24/original-1786002339983-1.jpg",
+      "./assets/nails/2023-03-24/original-1786002340379-2.jpg",
+      "./assets/nails/2023-03-24/original-1786002340825-3.jpg"
+    ],
+    "graphic": "./assets/nails/2023-03-24/nail-graphic-1786002338393.jpg"
+  },
+  {
     "number": 39,
     "date": "2022-06-01",
     "title": "오렌지 그라데이션",

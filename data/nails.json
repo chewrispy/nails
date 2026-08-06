@@ -262,7 +262,12 @@
     "memo": "삼성 이직한다고 삼성네일. 컬러도 파랑, 별도 세개씩, 한자로 삼성",
     "inspiration": "",
     "thumbnail": "./assets/nails/2025-11-15/thumbnail-1785908580297.jpg",
-    "photos": [],
+    "photos": [
+      "./assets/nails/2025-11-15/original-1786012535325-0.jpg",
+      "./assets/nails/2025-11-15/original-1786012536089-1.jpg",
+      "./assets/nails/2025-11-15/original-1786012536657-2.jpg",
+      "./assets/nails/2025-11-15/original-1786012537087-3.jpg"
+    ],
     "graphic": "./assets/nails/2025-11-15/nail-graphic-1785908579997.jpg"
   },
   {

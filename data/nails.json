@@ -527,5 +527,25 @@
       "./assets/nails/2024-11-09/original-1785905276157-0.jpg"
     ],
     "graphic": "./assets/nails/2024-11-09/nail-graphic.jpg"
+  },
+  {
+    "number": 32,
+    "date": "2018-09-21",
+    "title": "누드 베이지",
+    "shape": "스퀘어",
+    "finish": [
+      "스톤",
+      "그래픽"
+    ],
+    "colors": [
+      "#F7D4E2"
+    ],
+    "memo": "데싱디바 팁 중에 차분하면서 마음에 드는걸로 집에서 붙여본 네일. 아마 베를린 ESOMAR 출장 가기 전에 네일을 해보고 싶어서 샀던 것 같다. 사람 많이 모이는 행사에서 네트워킹 해야한다고 해서 립도 바르고 네일도 하고 그랬던 기억.",
+    "inspiration": "",
+    "thumbnail": "./assets/nails/2018-09-21/thumbnail-1785983167850.jpg",
+    "photos": [
+      "./assets/nails/2018-09-21/original-1785983168153-0.jpg"
+    ],
+    "graphic": "./assets/nails/2018-09-21/nail-graphic-1785983167544.jpg"
   }
 ]

@@ -536,15 +536,23 @@
     "number": 6,
     "date": "2025-02-01",
     "title": "하늘연작2 - 밤하늘 별똥별 / 낮하늘 태양",
-    "shape": "",
+    "shape": "스퀘어",
     "finish": [
       "그래픽 아트"
     ],
-    "colors": [],
+    "colors": [
+      "#F7D4E2"
+    ],
     "memo": "하늘연작2. 왼손은 밤하늘, 오른손은 낮하늘로 완전히 다른 연출. 왼손은 중지부터 약지까지 밤하늘에 별똥별 하나가 길게 꼬리를 끌며 떨어지는 듯 연출한 것이 포인트. 엄지와 검지는 가장자리에 둥글게 둘러준 골드 반콩으로 달을 표현. 오른손은 낮하늘에 큰 태양이 떠있는 것을 표현. 벤앤제리스 아이스크림 패키지처럼 귀엽게 연출한 구름과 비비드한 색감으로 볼드하게 그려낸 태양이 포인트.",
     "inspiration": "",
-    "photos": [],
-    "graphic": ""
+    "thumbnail": "./assets/nails/2025-02-01/thumbnail-1786013411278.jpg",
+    "photos": [
+      "./assets/nails/2025-02-01/original-1786013411603-0.jpg",
+      "./assets/nails/2025-02-01/original-1786013412094-1.jpg",
+      "./assets/nails/2025-02-01/original-1786013412749-2.jpg",
+      "./assets/nails/2025-02-01/original-1786013413190-3.jpg"
+    ],
+    "graphic": "./assets/nails/2025-02-01/nail-graphic-1786013410612.jpg"
   },
   {
     "number": 5,

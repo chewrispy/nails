@@ -371,7 +371,12 @@
     "memo": "원래 수박을 의도한 디자인이었는데 막상 하고나니 주변에서 수박?딸기?파프리카?홍고추? 다양한 추측이 난무함.",
     "inspiration": "",
     "thumbnail": "./assets/nails/2025-07-19/thumbnail-1785909428856.jpg",
-    "photos": [],
+    "photos": [
+      "./assets/nails/2025-07-19/original-1786012728598-0.jpg",
+      "./assets/nails/2025-07-19/original-1786012729081-1.jpg",
+      "./assets/nails/2025-07-19/original-1786012729518-2.jpg",
+      "./assets/nails/2025-07-19/original-1786012729913-3.jpg"
+    ],
     "graphic": "./assets/nails/2025-07-19/nail-graphic-1785909428516.jpg"
   },
   {

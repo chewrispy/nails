@@ -348,7 +348,12 @@
     "memo": "버건디 풀컬러",
     "inspiration": "",
     "thumbnail": "./assets/nails/2025-08-09/thumbnail-1785926538415.jpg",
-    "photos": [],
+    "photos": [
+      "./assets/nails/2025-08-09/original-1786012689786-0.jpg",
+      "./assets/nails/2025-08-09/original-1786012690299-1.jpg",
+      "./assets/nails/2025-08-09/original-1786012690782-2.jpg",
+      "./assets/nails/2025-08-09/original-1786012691243-3.jpg"
+    ],
     "graphic": "./assets/nails/2025-08-09/nail-graphic-1785926538122.jpg"
   },
   {

@@ -529,6 +529,26 @@
     "graphic": "./assets/nails/2024-11-09/nail-graphic.jpg"
   },
   {
+    "number": 36,
+    "date": "2022-03-12",
+    "title": "그레이 풀컬러",
+    "shape": "스퀘어",
+    "finish": [
+      "풀컬러"
+    ],
+    "colors": [
+      "#F7D4E2"
+    ],
+    "memo": "네일포시즌 첫 네일인가? 깔끔한 회색 젤네일.",
+    "inspiration": "",
+    "thumbnail": "./assets/nails/2022-03-12/thumbnail-1786000019968.jpg",
+    "photos": [
+      "./assets/nails/2022-03-12/original-1786000020329-0.jpg",
+      "./assets/nails/2022-03-12/original-1786000020884-1.jpg"
+    ],
+    "graphic": "./assets/nails/2022-03-12/nail-graphic-1786000019442.jpg"
+  },
+  {
     "number": 35,
     "date": "2019-04-07",
     "title": "누드 플라워 패턴",

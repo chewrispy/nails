@@ -529,6 +529,27 @@
     "graphic": "./assets/nails/2024-11-09/nail-graphic.jpg"
   },
   {
+    "number": 42,
+    "date": "2023-07-16",
+    "title": "인디고 패디",
+    "shape": "스퀘어",
+    "finish": [
+      "파우더"
+    ],
+    "colors": [
+      "#F7D4E2"
+    ],
+    "memo": "회사 체육대회에서 장애물달리기에 등떠밀려 나갔다가 왼쪽 발목인대 완전 파열이 되어서 3-4개월간 깁스를 하고 지내던 시절. 깁스하고 초췌한 모습으로 내내 재택근무를 하다가 우울함이 밀려와서 기분전환을 위해 패디 팁을 붙여봄.",
+    "inspiration": "",
+    "thumbnail": "./assets/nails/2023-07-16/thumbnail-1786002993491.jpg",
+    "photos": [
+      "./assets/nails/2023-07-16/original-1786002993794-0.jpg",
+      "./assets/nails/2023-07-16/original-1786002994433-1.jpg",
+      "./assets/nails/2023-07-16/original-1786002994951-2.jpg"
+    ],
+    "graphic": "./assets/nails/2023-07-16/nail-graphic-1786002992996.jpg"
+  },
+  {
     "number": 41,
     "date": "2023-04-26",
     "title": "화이트 프렌치",

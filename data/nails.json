@@ -393,7 +393,12 @@
     "memo": "회색과 핫핑크",
     "inspiration": "",
     "thumbnail": "./assets/nails/2025-06-28/thumbnail-1785928941206.jpg",
-    "photos": [],
+    "photos": [
+      "./assets/nails/2025-06-28/original-1786012767762-0.jpg",
+      "./assets/nails/2025-06-28/original-1786012768173-1.jpg",
+      "./assets/nails/2025-06-28/original-1786012768586-2.jpg",
+      "./assets/nails/2025-06-28/original-1786012769019-3.jpg"
+    ],
     "graphic": "./assets/nails/2025-06-28/nail-graphic-1785928940769.jpg"
   },
   {

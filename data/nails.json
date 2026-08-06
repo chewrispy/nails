@@ -105,7 +105,12 @@
     "memo": "오빠가 카톡으로 꽃 디자인을 보내줬는데 꽃을 그리다가 계속 실패해서 15-20분간 씨름하다가 다른 디자인으로 선회. 마침 얼마전에 봤던 젬스톤네일이 생각나서 그걸로 결정.",
     "inspiration": "./assets/nails/2026-04-17/inspiration-1785981749701.jpg",
     "thumbnail": "./assets/nails/2026-04-17/thumbnail-1785908426556.jpg",
-    "photos": [],
+    "photos": [
+      "./assets/nails/2026-04-17/original-1786012252887-0.jpg",
+      "./assets/nails/2026-04-17/original-1786012253279-1.jpg",
+      "./assets/nails/2026-04-17/original-1786012253611-2.jpg",
+      "./assets/nails/2026-04-17/original-1786012254038-3.jpg"
+    ],
     "graphic": "./assets/nails/2026-04-17/nail-graphic.jpg"
   },
   {

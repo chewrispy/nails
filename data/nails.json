@@ -529,6 +529,27 @@
     "graphic": "./assets/nails/2024-11-09/nail-graphic.jpg"
   },
   {
+    "number": 44,
+    "date": "2024-01-13",
+    "title": "글리터 그라데이션",
+    "shape": "스퀘어",
+    "finish": [
+      "글리터",
+      "그라데이션"
+    ],
+    "colors": [
+      "#F7D4E2"
+    ],
+    "memo": "내가 이니스프리에서 제주 테마로 나온 네일 몇개 사서 직접 발랐음.",
+    "inspiration": "",
+    "thumbnail": "./assets/nails/2024-01-13/thumbnail-1786003348493.jpg",
+    "photos": [
+      "./assets/nails/2024-01-13/original-1786003348836-0.jpg",
+      "./assets/nails/2024-01-13/original-1786003349287-1.jpg"
+    ],
+    "graphic": "./assets/nails/2024-01-13/nail-graphic-1786003347993.jpg"
+  },
+  {
     "number": 43,
     "date": "2023-12-04",
     "title": "블랙 그라데이션",

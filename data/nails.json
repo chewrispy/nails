@@ -614,7 +614,10 @@
     "memo": "아직 화려한 디자인은 어색해서 심플하고 무난하게. 너무 심심하니 빨간 리본으로 포인트.",
     "inspiration": "",
     "thumbnail": "./assets/nails/2024-11-30/thumbnail-1785978521828.jpg",
-    "photos": [],
+    "photos": [
+      "./assets/nails/2024-11-30/original-1786013761665-0.jpg",
+      "./assets/nails/2024-11-30/original-1786013762084-1.jpg"
+    ],
     "graphic": "./assets/nails/2024-11-30/nail-graphic-1785928196351.jpg"
   },
   {

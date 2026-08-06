@@ -326,7 +326,12 @@
     "memo": "펄 색깔 다르게",
     "inspiration": "",
     "thumbnail": "./assets/nails/2025-09-12/thumbnail-1785926477381.jpg",
-    "photos": [],
+    "photos": [
+      "./assets/nails/2025-09-12/original-1786012643664-0.jpg",
+      "./assets/nails/2025-09-12/original-1786012644214-1.jpg",
+      "./assets/nails/2025-09-12/original-1786012644593-2.jpg",
+      "./assets/nails/2025-09-12/original-1786012644962-3.jpg"
+    ],
     "graphic": "./assets/nails/2025-09-12/nail-graphic-1785926477003.jpg"
   },
   {

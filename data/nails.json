@@ -529,6 +529,28 @@
     "graphic": "./assets/nails/2024-11-09/nail-graphic.jpg"
   },
   {
+    "number": 35,
+    "date": "2019-04-07",
+    "title": "누드 플라워 패턴",
+    "shape": "스퀘어",
+    "finish": [
+      "그래픽"
+    ],
+    "colors": [
+      "#F7D4E2"
+    ],
+    "memo": "젤라또팩토리 세번째. 귀여운 플라워 패턴이 콕콕 박혀있는 차분한 누드톤 네일.",
+    "inspiration": "",
+    "thumbnail": "./assets/nails/2019-04-07/thumbnail-1785988706435.jpg",
+    "photos": [
+      "./assets/nails/2019-04-07/original-1785988706740-0.jpg",
+      "./assets/nails/2019-04-07/original-1785988707152-1.jpg",
+      "./assets/nails/2019-04-07/original-1785988707635-2.jpg",
+      "./assets/nails/2019-04-07/original-1785988708025-3.jpg"
+    ],
+    "graphic": "./assets/nails/2019-04-07/nail-graphic-1785988705951.jpg"
+  },
+  {
     "number": 34,
     "date": "2019-03-31",
     "title": "핑크 레이스",

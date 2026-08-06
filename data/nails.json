@@ -84,7 +84,10 @@
     "memo": "컬러풀한 그라데이션 시안을 가져갔었는데 마지막에 신상 시럽네일로 변경, 샘플판을 보고 색깔은 보라색으로 결정.",
     "inspiration": "",
     "thumbnail": "./assets/nails/2026-05-16/thumbnail.jpg",
-    "photos": [],
+    "photos": [
+      "./assets/nails/2026-05-16/original-1786012202025-0.jpg",
+      "./assets/nails/2026-05-16/original-1786012202454-1.jpg"
+    ],
     "graphic": "./assets/nails/2026-05-16/nail-graphic.jpg"
   },
   {

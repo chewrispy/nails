@@ -560,21 +560,22 @@
     "title": "하늘연작1 - 은하수",
     "shape": "스퀘어",
     "finish": [
-      "그래픽 아트"
+      "그래픽 아트",
+      "스티커"
     ],
     "colors": [
       "#F7D4E2"
     ],
     "memo": "하늘연작1. 밤하늘 컨셉. 왼손은 은하수 오른손은 밤하늘의 은하수. 밤하늘 은하수가 흐르듯이 이어지는게 포인트",
     "inspiration": "",
-    "thumbnail": "./assets/nails/2025-01-18/thumbnail-1786013646175.jpg",
+    "thumbnail": "./assets/nails/2025-01-18/thumbnail-1786066075572.jpg",
     "photos": [
       "./assets/nails/2025-01-18/original-1786013646542-0.jpg",
       "./assets/nails/2025-01-18/original-1786013647049-1.jpg",
       "./assets/nails/2025-01-18/original-1786013647442-2.jpg",
       "./assets/nails/2025-01-18/original-1786013648021-3.jpg"
     ],
-    "graphic": "./assets/nails/2025-01-18/nail-graphic-1786013645716.jpg"
+    "graphic": "./assets/nails/2025-01-18/nail-graphic-1786066075261.jpg"
   },
   {
     "number": 3,
